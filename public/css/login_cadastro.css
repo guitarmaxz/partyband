@@ -1,0 +1,80 @@
+*{margin: 0; padding: 0;}
+main{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@font-face {
+    font-family: Impact;
+    src: url("../fonts/impact.ttf");
+  }
+.bg-lateral{
+    width: 50vw;
+    height: 100vh;
+    background-image: url("../imgs/bg_micro.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.black-fosc{
+    width: 100%;
+    height: 100%; 
+    background-color: rgba(0,0,0,0.7);
+    z-index: 99999;
+}
+
+.black-fosc H1{
+    z-index: 9999999;
+    color: white;
+    font-family: Impact;
+    padding: 15px;
+}
+.contem-form{
+    width: 50vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.contem-form H2 {
+    font-family: Impact;
+    font-size: 80px;
+}
+
+.form {
+    width: 500px;
+    height: 450px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form form * {
+    margin: 5px;
+}
+
+.input_pb {
+ 
+  width: 400px;
+  height: 45px;
+  margin: 0 auto;
+  padding: 1.5rem 2rem;
+  border-radius: 1.5rem;
+  border-color: rgba(0,0,0,0.5);
+  outline: 0;
+}
+
+
+.form form button {
+    width: 400px;
+    height: 80px;
+    font-family: Impact;
+    background-color:  #FF5656;
+    font-size: 40px;
+    color: white;
+    border-radius: 1.5rem;
+}

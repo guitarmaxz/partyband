@@ -1,0 +1,74 @@
+.form-search-menu{
+    width:85%;
+}
+.search-menu{
+    width:100%;
+}
+.foto_user{
+    width:200px;
+    height:200px;;
+}
+.foto_user_alterar{
+    width:70px;
+    height:70px;;
+}
+.card-perfil{
+    margin:2em 0 2em 0;
+}
+.card-publicacoes{
+    margin:1em 2em 2em 0;
+}
+.card{
+    padding:2em;
+}
+.btn-generos{
+   border-radius: 20px 20px 20px 20px;
+   width:100px;
+   border:solid 1px;
+   margin-bottom: 10px;
+}
+.item-perfil{
+    margin:1em 0 0 0;
+}
+.title-perfil{
+    margin:1em 0 1em  0;
+}
+#perfil_label_alterarfoto{
+    color:blue;
+}
+.perfil_form{
+    margin: 2em 2em 2em 2em;
+}
+.btn-generos_alterar{
+    border-radius: 20px 20px 20px 20px;
+    width:90px;
+    border:solid 1px;
+    margin-bottom: 10px;
+ }
+
+
+  /* ---home-- */
+  .lateral1{
+    left:5%;     
+    }
+  .lateral2{
+      position: fixed;
+      right: 0;  
+  }
+  
+  @media (max-width: 575.98px) {
+    .lateral2{
+       display:none;  
+    }
+     .lateral1{
+        display:none;  
+     }
+
+   }
+
+  
+  
+
+
+  
+
