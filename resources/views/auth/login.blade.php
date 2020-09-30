@@ -23,7 +23,11 @@
     <main>
         <div class="bg-lateral">
             <div class="black-fosc">
-                <h1>PARTYBAND</h1>
+                <h1>PARTY</h1> 
+                <div class="raio">
+                    <img src="{{asset('icos/raio_branco.png')}}" alt="">
+                </div> 
+                <h1>BAND</h1>
             </div>
         </div>
         <div class="contem-form">
