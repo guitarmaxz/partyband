@@ -48,7 +48,7 @@
                         value="{{ old('username') }}">
 
                     @error('username')
-                    <span class="invalid-feedback" role="alert">
+                    <span class="invalid-feedback msg-error" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>
                     @enderror
@@ -58,7 +58,7 @@
                         class="input_pb @error('password') is-invalid @enderror" name="password"
                         >
                     @error('password')
-                    <span class="invalid-feedback" role="alert">
+                    <span class="invalid-feedback msg-error" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>
                     @enderror
@@ -85,7 +85,7 @@
                     @endif
                 </div>
                 <div class="d-flex justify-content-center mt-3 login_container">
-                    <button type="submit" class="btn">
+                    <button type="submit" class="btn_pb ">
                         {{ __('Login') }}
                     </button>
                 </div>
