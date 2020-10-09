@@ -8,7 +8,7 @@ class Musico extends Model
 {
     protected $table = 'musicos';
     protected $fillable = [
-        'nome', 'sexo', 'telefone', 'biografia'
+        'nome', 'sexo', 'telefone', 'biografia', 'imagem'
     ];
 
     public function federacaos()

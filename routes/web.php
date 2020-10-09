@@ -19,7 +19,10 @@ Auth::routes();
 //ROTA INICIAL
 Route::get('/', function () {
     return view('auth.login');
-})->name('index');
+})->name('index'); 
+
+/* Route::view('/', 'auth.login')->name('index'); */
+
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 Route::get('cadastro', 'CadastroController@index')->name('cadastro');
 Route::post('cadastro/store', 'CadastroController@store')->name('cadastro.store');
@@ -28,8 +31,6 @@ Route::post('cadastro/store', 'CadastroController@store')->name('cadastro.store'
 
 
 //ROTAS PARA ADMINISTRADOR
-Route::get('admin/login', 'Admin\\UserController@login')->name('admin.auth');
-
 
 Route::group(['middleware' => 'auth'], function () {
     Route::prefix('admin')->name('admin.')->namespace('Admin')->group(function(){

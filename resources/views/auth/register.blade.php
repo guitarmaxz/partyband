@@ -35,17 +35,17 @@
             <div class="form">
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
-
+                        
                         <div class="input-group mb-2">
-                            <input class="input_pb" id="username" type="text"
-                                @error('username') is-invalid @enderror" name="username"
+                            <input class="input_pb @error('username') is-invalid @enderror" id="username" type="text"
+                                 name="username"
                                 value="{{ old('username') }}" placeholder="Insira um usuário" >
-
-                            @error('username')
-                            <span class="invalid-feedback msg-error" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
+                                @error('username')
+                                <span class="invalid-feedback msg-error" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                           
                         </div>
 
                         <div class="input-group mb-2">
@@ -58,6 +58,7 @@
                                 <strong>{{ $message }}</strong>
                             </span>
                             @enderror
+                            
                         </div>
 
                         <div class="input-group mb-2">
@@ -70,6 +71,7 @@
                                 <strong>{{ $message }}</strong>
                             </span>
                             @enderror
+                           
                         </div>
 
                         <div class="form-group row">

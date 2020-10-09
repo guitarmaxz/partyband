@@ -31,7 +31,7 @@
                 <div class="col-sm-12 col-md-10 mx-auto jumbotron" style="opacity: 0.9">
                     <div class="justify-content-center form_container mx-auto">
                         <div class="container my-4">@include('flash::message')</div>
-                        <h1 class="display-4 text-center mb-5">Cadastro</h1>
+                        <h1 class="display-4 text-center mb-5">Perfil</h1>
                         <form method="POST" action="{{ route('cadastro.store') }}">
                             @csrf
                             <div class="form-group row">

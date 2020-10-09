@@ -5,10 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Genero;
+use App\Http\Requests\PerfilRequest;
 use App\Musico;
 use App\Post;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+
+use Illuminate\Support\Facades\Storage;
 
 class HomeController extends Controller
 {
@@ -143,8 +146,8 @@ class HomeController extends Controller
 
     public function search(Request $request)
     {   
-
-        $search = $request->get('search'); 
+        
+        $search =  trim(strtoupper($request->input('search')));; 
         //$posts = DB::table('users')->where('instrumento', 'like', '%'.$search.'%')->paginate(5);  
         // $query = "SELECT u.name FROM users u JOIN instrumentos i ON u.id = i.id WHERE i.descricao LIKE '%{$search}%'";
 
@@ -168,11 +171,12 @@ class HomeController extends Controller
         }
     }
 
-    public function postar(Request $request)
+    public function postar(PerfilRequest $request)
     {  
         $post = new Post();
         $post->user_id = Auth::id();
         $post->postagem = $request->postagem;
+        $post->imagem = $request->file('imagem')->getClientOriginalName();
         $post->save();
        
        

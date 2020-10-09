@@ -30,11 +30,22 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                <form action="{{route('postar')}}" method="POST">
+                <form action="{{route('postar')}}" method="POST" enctype="multipart/form-data">
                     @csrf
                         <div class="form-group">
+                            <input type="file" name="imagem" class="@error('imagem') is-invalid @enderror">
+                            @error('imagem')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
                           <label for="post">Escreva uma postagem</label>
-                          <textarea class="form-control" name="postagem" id="postagem" rows="3" value="{{old('postagem')}}"></textarea>
+                          <textarea class="form-control @error('postagem') is-invalid @enderror" name="postagem" id="postagem" rows="3" value="{{old('postagem')}}"></textarea>
+                          @error('postagem')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
                         </div>  
                         
                         <button type="submit">Enviar</button>

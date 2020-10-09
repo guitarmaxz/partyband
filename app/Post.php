@@ -8,7 +8,7 @@ class Post extends Model
 {
     protected $table = 'posts';
     protected $fillable = [
-        'postagem'
+        'postagem', 'imagem'
     ];
 
     public function users()
