@@ -24,7 +24,7 @@ class PerfilRequest extends FormRequest
     public function rules()
     {
         return [
-            'imagem'         => 'mimes:jpeg,jpg,bmp,png|required|max:2040',
+            'imagem'         => 'mimes:jpeg,jpg,bmp,png|required|max:800',
             'postagem'         => 'required',
         ];
 
