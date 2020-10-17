@@ -20,7 +20,7 @@ class CreateMusicosTable extends Migration
 
             $table->string('nome');
             $table->string('telefone');
-            $table->string('imagem')->nullable();
+            $table->string('perfil')->nullable();
             $table->text('biografia');
             $table->enum('sexo', ['Feminino', 'Masculino']);
             $table->foreign('user_id')->references('id')->on('users');

@@ -60,23 +60,25 @@
         </div>
         
         <div class="col-sm-6 overflow-auto">
-            @foreach ($postagens as $dados)
+            
                 
-           
+            @foreach ($query as $dados)
             <div class="card mb-3">
+                
                 <div class="card-body " style="height:100px">
                     <div class="d-flex flex-row bd-highlight mb-3">
+                        
                         <div class="p-2 bd-highlight" style="margin-top: -25px; margin-left: -30px"> 
-                            <img src="{{asset('imgs/perfil.jpg')}}" alt="perfil" class=" img-fluid rounded-circle p-3" style="width:100px; height: 100px">
+                        <img src="{{asset('storage/perfil/'.$dados->user_id. '/' . $dados->perfil)}}" alt="perfil" class=" img-fluid rounded-circle p-3" style="width:100px; height: 100px">
                         </div>
-                        <div class="p-2 bd-highlight" style="margin-top: 20px; margin-left: -10px">Marcos Paulo</div>
+                    <div class="p-2 bd-highlight" style="margin-top: 20px; margin-left: -10px">{{$dados->username}}</div>
                     </div>
                 </div>
-                <img class="card-img-top" src="{{asset('imgs/banda.jpg')}}" alt="Card image cap">
+                <img class="card-img-top" src="{{asset('storage/postagem/'. $dados->user_id . '/' . $dados->imagem)}}" alt="Card image cap">
                 <div class="card-body" style="min-height:150px;">
                     <div class="d-flex flex-row bd-highlight mb-3">
                         <div class="p-2 bd-highlight" style="width:50px; height:70px"> <img class="card-img-top"
-                                src="{{asset('imgs/ico/like.png')}}" alt="Card image cap"></div>
+                                src="#" alt="Card image cap"></div>
                         <div class="p-2 bd-highlight" style="width:50px; height:70px"> <i style='font-size:30px'
                                 class='far'>&#xf075;</i></div>
                         <div class="p-2 bd-highlight" style="width:50px; height:70px"> <i class='far fa-paper-plane'
@@ -85,114 +87,10 @@
                 <p class="card-text text-justify">{{$dados->postagem}}</p>
                     <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
                 </div>
+               
             </div>
             @endforeach
-          
-
-            <div class="card mb-3">
-                <div class="card-body " style="height:100px">
-                    <div class="d-flex flex-row bd-highlight mb-3">
-                        <div class="p-2 bd-highlight" style="margin-top: -25px; margin-left: -30px"> <img
-                                src="{{asset('imgs/perfil5.jpg')}}" alt="" class=" img-fluid rounded-circle p-3"
-                                style="width:100px; height: 100px"></div>
-                        <div class="p-2 bd-highlight" style="margin-top: 20px; margin-left: -10px">Leticia da Silva</div>
-                    </div>
-
-                </div>
-                <img class="card-img-top" src="{{asset('imgs/post1.jpg')}}"  alt="Card image cap">
-                <div class="card-body" style="min-height:150px;">
-                    <div class="d-flex flex-row bd-highlight mb-3">
-                        <div class="p-2 bd-highlight" style="width:50px; height:70px"> <img class="card-img-top"
-                                src="{{asset('imgs/ico/like.png')}}" alt="Card image cap"></div>
-                        <div class="p-2 bd-highlight" style="width:50px; height:70px"> <i style='font-size:30px'
-                                class='far'>&#xf075;</i></div>
-                        <div class="p-2 bd-highlight" style="width:50px; height:70px"> <i class='far fa-paper-plane'
-                                style='font-size:30px'></i></div>
-                    </div>
-                    <p class="card-text text-justify">This is a wider card with supporting text below as a natural
-                        lead-in to additional content. This content is a little bit longer.</p>
-                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                </div>
-            </div>
-
-            <div class="card mb-3">
-                <div class="card-body " style="height:100px">
-                    <div class="d-flex flex-row bd-highlight mb-3">
-                        <div class="p-2 bd-highlight" style="margin-top: -25px; margin-left: -30px"> <img
-                                src="{{asset('imgs/perfil3.jpg')}}" alt="" class=" img-fluid rounded-circle p-3"
-                                style="width:100px; height: 100px"></div>
-                        <div class="p-2 bd-highlight" style="margin-top: 20px; margin-left: -10px">Roberto Andrades</div>
-                    </div>
-
-                </div>
-                <img class="card-img-top" src="{{asset('imgs/post2.jpg')}}" alt="Card image cap">
-                <div class="card-body" style="min-height:150px;">
-                    <div class="d-flex flex-row bd-highlight mb-3">
-                        <div class="p-2 bd-highlight" style="width:50px; height:70px"> <img class="card-img-top"
-                                src="{{asset('imgs/ico/like.png')}}" alt="Card image cap"></div>
-                        <div class="p-2 bd-highlight" style="width:50px; height:70px"> <i style='font-size:30px'
-                                class='far'>&#xf075;</i></div>
-                        <div class="p-2 bd-highlight" style="width:50px; height:70px"> <i class='far fa-paper-plane'
-                                style='font-size:30px'></i></div>
-                    </div>
-                    <p class="card-text text-justify">This is a wider card with supporting text below as a natural
-                        lead-in to additional content. This content is a little bit longer.</p>
-                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                </div>
-            </div>
-
-            <div class="card mb-3">
-                <div class="card-body " style="height:100px">
-                    <div class="d-flex flex-row bd-highlight mb-3">
-                        <div class="p-2 bd-highlight" style="margin-top: -25px; margin-left: -30px"> <img
-                                src="{{asset('imgs/perfil6.jpg')}}" alt="" class=" img-fluid rounded-circle p-3"
-                                style="width:100px; height: 100px"></div>
-                        <div class="p-2 bd-highlight" style="margin-top: 20px; margin-left: -10px">Amanda Medeiros</div>
-                    </div>
-
-                </div>
-                <img class="card-img-top" src="{{asset('imgs/post3.jpg')}}" alt="Card image cap">
-                <div class="card-body" style="min-height:150px;">
-                    <div class="d-flex flex-row bd-highlight mb-3">
-                        <div class="p-2 bd-highlight" style="width:50px; height:70px"> <img class="card-img-top"
-                                src="{{asset('imgs/ico/like.png')}}" alt="Card image cap"></div>
-                        <div class="p-2 bd-highlight" style="width:50px; height:70px"> <i style='font-size:30px'
-                                class='far'>&#xf075;</i></div>
-                        <div class="p-2 bd-highlight" style="width:50px; height:70px"> <i class='far fa-paper-plane'
-                                style='font-size:30px'></i></div>
-                    </div>
-                    <p class="card-text text-justify">This is a wider card with supporting text below as a natural
-                        lead-in to additional content. This content is a little bit longer.</p>
-                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                </div>
-            </div>
-
-            <div class="card mb-3">
-                <div class="card-body " style="height:100px">
-                    <div class="d-flex flex-row bd-highlight mb-3">
-                        <div class="p-2 bd-highlight" style="margin-top: -25px; margin-left: -30px"> <img
-                                src="{{asset('imgs/perfil4.jpg')}}" alt="" class=" img-fluid rounded-circle p-3"
-                                style="width:100px; height: 100px"></div>
-                        <div class="p-2 bd-highlight" style="margin-top: 20px; margin-left: -10px">Nathalia Ribeiro</div>
-                    </div>
-
-                </div>
-                <img class="card-img-top" src="{{asset('imgs/post4.jpg')}}" alt="Card image cap">
-                <div class="card-body" style="min-height:150px;">
-                    <div class="d-flex flex-row bd-highlight mb-3">
-                        <div class="p-2 bd-highlight" style="width:50px; height:70px"> <img class="card-img-top"
-                                src="{{asset('imgs/ico/like.png')}}" alt="Card image cap"></div>
-                        <div class="p-2 bd-highlight" style="width:50px; height:70px"> <i style='font-size:30px'
-                                class='far'>&#xf075;</i></div>
-                        <div class="p-2 bd-highlight" style="width:50px; height:70px"> <i class='far fa-paper-plane'
-                                style='font-size:30px'></i></div>
-                    </div>
-                    <p class="card-text text-justify">This is a wider card with supporting text below as a natural
-                        lead-in to additional content. This content is a little bit longer.</p>
-                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                </div>
-            </div>
-
+            
         </div>
 
         

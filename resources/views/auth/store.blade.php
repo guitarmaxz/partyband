@@ -32,8 +32,19 @@
                     <div class="justify-content-center form_container mx-auto">
                         <div class="container my-4">@include('flash::message')</div>
                         <h1 class="display-4 text-center mb-5">Perfil</h1>
-                        <form method="POST" action="{{ route('cadastro.store') }}">
+                        <form method="POST" action="{{ route('cadastro.store') }}" enctype="multipart/form-data">
                             @csrf
+                          
+                                <div class="row">
+                                    <div class="mx-auto">
+                                <label class=newbtn>
+                                    <img id="blah" src="http://placehold.it/120x120" >
+                                    <input id="pic" class='pis' onchange="readURL(this);" type="file" name="pic" >
+                                    <p class="pl-3">Foto perfil</p>
+                                </label>
+                                </div>
+                                </div>
+                          
                             <div class="form-group row">
                                 <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
                                 <div class="col-md-6">
