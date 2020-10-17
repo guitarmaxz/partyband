@@ -44,9 +44,11 @@ class HomeController extends Controller
         else{ 
             $users = $this->user->all('perfil');
             $usuarios = DB::table('users')->select('username')->where('perfil', 'Comum')->orderBy('id', 'DESC')->paginate(4);
-            $postagens = DB::table('posts')->select('postagem')->orderBy('id', 'DESC');
-            $postagens = $postagens->get();
-            return view('home', compact('usuarios', 'users', 'postagens'));
+            /* $postagens = DB::table('posts')->select('user_id', 'postagem', 'imagem')->orderBy('id', 'DESC'); */
+            $query = DB::select('SELECT u.username, m.perfil, p.postagem, p.imagem, p.user_id FROM users u LEFT JOIN posts p on(u.id = p.user_id) INNER JOIN musicos m on(m.user_id = u.id) WHERE p.user_id = u.id ORDER BY p.id DESC');
+            
+            /*$postagens = $postagens->get(); */
+            return view('home', compact('usuarios', 'users', 'query'));
         }   
     }
 
@@ -68,6 +70,7 @@ class HomeController extends Controller
         else{
             $generos = Genero::all();  
             $postagens = DB::table('posts')->select('postagem')->where('user_id', Auth::id());
+        
             $postagens = $postagens->get();
             
             return view('perfil',compact('generos', 'postagens'));   
@@ -177,7 +180,11 @@ class HomeController extends Controller
         $post->user_id = Auth::id();
         $post->postagem = $request->postagem;
         $post->imagem = $request->file('imagem')->getClientOriginalName();
+        
+        $request->file('imagem')->storeAs(
+            'postagem/' . Auth()->User()->id, $post->imagem);
         $post->save();
+       
        
        
         

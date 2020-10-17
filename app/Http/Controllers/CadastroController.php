@@ -33,6 +33,15 @@ class CadastroController extends Controller
             $usuario->fed_id = $request['federacao'];
             $usuario->nome = $request->nome;
             $usuario->sexo = $request->sexo;
+            if($request->file('pic') == null){
+                $usuario->perfil = "Sem imagem";
+            }
+            else{
+                $usuario->perfil = $request->file('pic')->getClientOriginalName();
+             
+                $request->file('pic')->storeAs(
+                    'perfil/' . Auth()->User()->id, $usuario->perfil);
+            }
             $usuario->telefone = trim(str_replace('(', '', str_replace(')', '', str_replace(' ', '', str_replace('-', '', $request->telefone)))));
             $usuario->biografia = $request->biografia;
             $usuario->save();
