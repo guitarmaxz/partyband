@@ -12,23 +12,15 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{asset('css/style.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('css/custom.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('css/login_cadastro.css')}}">
     <script type="text/javascript" src="{{asset('js/jquery.js')}}"></script>
     <script type="text/javascript" src="{{asset('js/app.js')}}"></script>
     <script src='https://kit.fontawesome.com/a076d05399.js'></script>
 </head>
 <!--Coded with love by Mutiullah Samim-->
-<body style="background-image: url('imgs/background2.jpg'); background-size: cover; background-repeat: no-repeat; background-position: center;">
+<body>
     <main role="main">
-        <div class="container mt-5">
-            <div class="row">
-                <div class="col-sm-12 text-center">
-                    <img src="{{asset('imgs/logopartyband2.png')}}" alt="" class="img-fluid mt-5">
-                </div>
-            </div>
-            <br>
-            <div class="row">
-                
-                <div class="col-sm-12 col-md-10 mx-auto jumbotron" style="opacity: 0.9">
+    <div class="col-sm-12 col-md-10 mx-auto jumbotron" style="opacity: 0.9">
                     <div class="justify-content-center form_container mx-auto">
                         <div class="container my-4">@include('flash::message')</div>
                         <h1 class="display-4 text-center mb-5">Perfil</h1>
@@ -149,7 +141,9 @@
                     </div>
                 </div>
             </div>
-        </div>
+    <div class="contem-form">
+
+    </div>
     </main>
 
     <script src="{{asset('js/mascara.js')}}"></script>
