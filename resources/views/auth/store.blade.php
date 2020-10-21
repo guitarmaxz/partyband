@@ -19,145 +19,116 @@
 </head>
 <!--Coded with love by Mutiullah Samim-->
 <body>
-    <main role="main">
-    <div class="col-sm-12 col-md-10 mx-auto jumbotron" style="opacity: 0.9">
-                    <div class="justify-content-center form_container mx-auto">
-                        <div class="container my-4">@include('flash::message')</div>
-                        <h1 class="display-4 text-center mb-5">Perfil</h1>
-                        <form method="POST" action="{{ route('cadastro.store') }}" enctype="multipart/form-data">
-                            @csrf
-                          
-                                <div class="row">
-                                    <div class="mx-auto">
-                                <label class=newbtn>
-                                    <img id="blah" src="http://placehold.it/120x120" >
-                                    <input id="pic" class='pis' onchange="readURL(this);" type="file" name="pic" >
-                                    <p class="pl-3">Foto perfil</p>
-                                </label>
-                                </div>
-                                </div>
-                          
-                            <div class="form-group row">
-                                <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
-                                <div class="col-md-6">
-                                    <input id="nome" type="text"
-                                        class="form-control @error('nome') is-invalid @enderror" name="nome"
-                                        value="{{ old('nome') }}"  autocomplete="nome" autofocus>
-
-                                    @error('nome')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-                            </div>
-
-                         
-                          
-
-                            <div class="form-group row">
-                                    <label for="biografia"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('biografia') }}</label>
-
-                                <div class="col-md-6">
-                                    <textarea class="form-control @error('biografia') is-invalid @enderror" name="biografia" id="biografia" value="{{ old('biografia') }}" rows="3" ></textarea>
-                                    @error('biografia')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-                            </div> 
-
-                            <div class="form-group row">
-                                <label for="tel" class="col-md-4 col-form-label text-md-right">{{ __('Telefone') }}</label>
-                                <div class="col-md-6">
-                                    <input id="telefone" type="text"
-                                        class="form-control @error('telefone') is-invalid @enderror" name="telefone"
-                                        value="{{ old('telefone') }}" onkeyup="mascara('(##) #####-####',this,event,true)">
-
-                                    @error('telefone')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-                            </div>
-
-                           <div class="form-group row">
-                            <label for="sexo"
-                            class="col-md-4 col-form-label text-md-right">{{ __('sexo') }}</label>
-
-                        <div class="col-md-6">
-                            <select name="sexo" id="sexo" class="form-control" >
-                                <option selected>Selecione</option>
-                                <option id="Masculino">Masculino</option>
-                                <option id="Feminino">Feminino</option>
-                        </select> 
-                        </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="Instrumento"
-                            class="col-md-4 col-form-label text-md-right">{{ __('Instrumento') }}</label>
-
-                        <div class="col-md-6">
-                            <select name="instrumento[]" class="form-control" required   multiple>
-                                @foreach ($instrumentos as $dados)
-                            <option value="{{$dados->id}}">{{$dados->descricao}}</option>
-                                @endforeach
-                            </select>  
-                        </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="genero"
-                            class="col-md-4 col-form-label text-md-right">{{ __('Gênero Musicais') }}</label>
-
-                        <div class="col-md-6">
-                            <select name="genero[]" class="form-control" required multiple>
-                                @foreach ($generos as $dados)
-                                    <option value="{{$dados->id}}">{{$dados->descricao}}</option>
-                                @endforeach
-                            </select>  
-                        </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="federacao"
-                            class="col-md-4 col-form-label text-md-right">{{ __('Estado') }}</label>
-
-                        <div class="col-md-6">
-                            <select name="federacao" class="form-control" required >
-                                @foreach ($federacao as $dados)
-                                     <option value="{{$dados->id}}">{{$dados->uf}}</option>
-                                @endforeach
-                            </select>  
-                        </div>
-                        </div>
-
-                     
-
-            
-
-                            <div class="form-group row mb-0">
-                                <div class="col-md-6 offset-md-4">
-                                    <button type="submit" class="btn btn-primary">
-                                        {{ __('Register') }}
-                                    </button>
-                                <a href="{{route('logout')}}" class="ml-3 btn btn-primary">Voltar</a>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-    <div class="contem-form">
-
+    <main>
+    <div class="bg-lateral-perfil">
+        <div class="contem-cards">
+           <div class="cards c1"></div>
+           <div class="cards c2"></div>
+           <div class="cards c3"></div>
+        </div>
     </div>
+
+        <div class="contem-form-perfil">
+            <h1>PERFIL</h1>
+            <form method="POST" action="{{ route('cadastro.store') }}" enctype="multipart/form-data">
+                @csrf
+                <label class=newbtn>
+                    <img id="blah" src="http://placehold.it/120x120" class="ft-perfil">
+                        <input id="pic" class='pis' onchange="readURL(this);" type="file" name="pic">                  
+                </label>
+                
+                <div class="content">
+                <div class="contem-inputs">
+                    
+                <div class="grp-input nome">
+                        <label for="">Nome</label>
+                        <input class="input_pb form-control @error('nome') is-invalid @enderror" name="nome"
+                                            value="{{ old('nome') }}"  autocomplete="nome" autofocus" type="text">
+                        @error('nome')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                </div>
+                    
+                <div class="grp-input sexo" >
+                        <label for="">sexo</label>
+                        <select name="sexo" id="sexo" class="form-control" style="width:100%" >
+                            <option selected>Selecione</option>
+                            <option id="Masculino">Masculino</option>
+                            <option id="Feminino">Feminino</option>
+                        </select> 
+                </div>
+
+                <div class="grp-input cidade">
+                        <label for="">Telefone</label>
+                        <input id="telefone" type="text"
+                                            class="input_pb form-control @error('telefone') is-invalid @enderror" name="telefone"
+                                            value="{{ old('telefone') }}" onkeyup="mascara('(##) #####-####',this,event,true)">
+
+                                        @error('telefone')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                </div>
+
+                <div class="grp-input estado" >
+                        <label for="">Estado</label>
+                        <select name="federacao" class="form-control"  required >
+                            @foreach ($federacao as $dados)
+                                <option value="{{$dados->id}}">{{$dados->uf}}</option>
+                            @endforeach
+                        </select>  
+                </div>
+
+                <div class="grp-input email">
+                        <label for="">E-mail</label>
+                        <input class="input_pb " type="text">
+                </div>
+                
+                <div class="grp-input biografia">
+                <label for="">Biografia</label>
+                <textarea class=" input_pb form-control @error('biografia') is-invalid @enderror" name="biografia" id="biografia" value="{{ old('biografia') }}" rows="3" style="width:100%" ></textarea>
+                        @error('biografia')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                </div>
+                
+                <div class="grp-input instrumento">
+                        <label for="">Instrumento</label>
+                        <select name="instrumento[]" class="form-control grp-input" required   multiple>
+                            @foreach ($instrumentos as $dados)
+                            <option value="{{$dados->id}}">{{$dados->descricao}}</option>
+                            @endforeach
+                        </select>  
+                </div>
+
+                <div class="grp-input generos">
+                        <label for="">Generos</label>
+                        <select name="genero[]" class="form-control grp-input" required multiple>
+                            @foreach ($generos as $dados)
+                                <option value="{{$dados->id}}">{{$dados->descricao}}</option>
+                            @endforeach
+                        </select>  
+                </div>
+
+                <div class="cotem-btn-perfil">
+                    <button type="submit" class="btn_pb">
+                    {{ __('Gerar Perfil') }}
+                    </button>
+                    <a href="{{route('logout')}}" class="text-center">Voltar</a>
+                </div>
+                    
+                </div>
+
+            </form>
+        </div>
+        
     </main>
 
     <script src="{{asset('js/mascara.js')}}"></script>
 </body>
-
 </html>
