@@ -43,7 +43,12 @@ class HomeController extends Controller
         }
         else{ 
             $users = $this->user->all('perfil');
-            $usuarios = DB::table('users')->select('username')->where('perfil', 'Comum')->orderBy('id', 'DESC')->paginate(4);
+            $usuarios = DB::table('users')
+                            ->join('musicos', 'users.id', '=', 'musicos.user_id')
+                            ->join('federacaos', 'musicos.fed_id', '=', 'federacaos.id')
+                                ->select('users.username', 'musicos.perfil', 'musicos.user_id', 'federacaos.uf')->where('users.perfil', '=', 'Comum')
+                                ->orderBy('users.id', 'DESC')
+                                ->paginate(3);
             /* $postagens = DB::table('posts')->select('user_id', 'postagem', 'imagem')->orderBy('id', 'DESC'); */
             $query = DB::select('SELECT u.username, m.perfil, p.postagem, p.imagem, p.user_id FROM users u LEFT JOIN posts p on(u.id = p.user_id) INNER JOIN musicos m on(m.user_id = u.id) WHERE p.user_id = u.id ORDER BY p.id DESC');
             

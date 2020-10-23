@@ -99,10 +99,16 @@
                 @foreach ($usuarios as $dados)
                 <div class="p-2 bd-highlight mr-auto d-flex">
                     <div class="container" style="width:100px; height: 100px;">
-                        <img src="{{asset('imgs/ico/icon.png')}}" alt="" class="img-fluid rounded-circle p-1">
+                        <img src="{{asset('storage/perfil/'.$dados->user_id. '/' . $dados->perfil)}}" alt="perfil" class=" img-fluid rounded-circle p-2" style="width:100px; height: 100px">
                     </div>
                     <div class="mt-5">
-                    <a href="#">{{$dados->username}}</a>
+                    <p>
+                        Usuario: <a href="#">{{$dados->username}}</a>
+                    </p>
+                    <p>
+                        Estado: <a href="#">{{$dados->uf}}</a>
+                    </p>
+                   
                     </div>
                 </div>
                 @endforeach
