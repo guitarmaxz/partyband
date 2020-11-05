@@ -69,23 +69,23 @@
                     <div class="d-flex flex-row bd-highlight mb-3">
                         
                         <div class="p-2 bd-highlight" style="margin-top: -25px; margin-left: -30px"> 
-                        <img src="{{asset('storage/perfil/'.$dados->user_id. '/' . $dados->perfil)}}" alt="perfil" class=" img-fluid rounded-circle p-3" style="width:100px; height: 100px">
+                        <img src="{{asset('storage/perfil/'.$dados->user_id. '/' . $dados->foto)}}" alt="perfil" class=" img-fluid rounded-circle p-3" style="width:100px; height: 100px">
                         </div>
                     <div class="p-2 bd-highlight" style="margin-top: 20px; margin-left: -10px">{{$dados->username}}</div>
                     </div>
                 </div>
-                <img class="card-img-top" src="{{asset('storage/postagem/'. $dados->user_id . '/' . $dados->imagem)}}" alt="Card image cap">
+                <img class="card-img-top" src="{{asset('storage/postagem/'. $dados->usuario_id . '/' . $dados->imagem)}}" alt="Card image cap">
                 <div class="card-body" style="min-height:150px;">
                     <div class="d-flex flex-row bd-highlight mb-3">
-                        <div class="p-2 bd-highlight" style="width:50px; height:70px"> <img class="card-img-top"
-                                src="#" alt="Card image cap"></div>
+                        <div class="p-2 bd-highlight" style="width:50px; height:70px"> <i style='font-size:30px'
+                            class='far'>&#xf075;</i></div>
                         <div class="p-2 bd-highlight" style="width:50px; height:70px"> <i style='font-size:30px'
                                 class='far'>&#xf075;</i></div>
                         <div class="p-2 bd-highlight" style="width:50px; height:70px"> <i class='far fa-paper-plane'
                                 style='font-size:30px'></i></div>
                     </div>
                 <p class="card-text text-justify">{{$dados->postagem}}</p>
-                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                <p class="card-text"><small class="text-muted">postado: {{$dados->created_at}}</small></p>
                 </div>
                
             </div>
@@ -99,7 +99,7 @@
                 @foreach ($usuarios as $dados)
                 <div class="p-2 bd-highlight mr-auto d-flex">
                     <div class="container" style="width:100px; height: 100px;">
-                        <img src="{{asset('storage/perfil/'.$dados->user_id. '/' . $dados->perfil)}}" alt="perfil" class=" img-fluid rounded-circle p-2" style="width:100px; height: 100px">
+                        <img src="{{asset('storage/perfil/'.$dados->user_id. '/' . $dados->foto)}}" alt="perfil" class=" img-fluid rounded-circle p-2" style="width:100px; height: 100px">
                     </div>
                     <div class="mt-5">
                     <p>

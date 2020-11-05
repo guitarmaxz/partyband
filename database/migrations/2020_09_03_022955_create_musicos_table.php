@@ -17,14 +17,13 @@ class CreateMusicosTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('fed_id');
-
+            $table->string('cidade');
             $table->string('nome');
-            $table->string('telefone');
-            $table->string('perfil')->nullable();
+            $table->string('foto')->nullable();
             $table->text('biografia');
             $table->enum('sexo', ['Feminino', 'Masculino']);
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('fed_id')->references('id')->on('federacaos');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('CASCADE');
+            $table->foreign('fed_id')->references('id')->on('federacaos')->onDelete('CASCADE');
             $table->timestamps();
         });
     }

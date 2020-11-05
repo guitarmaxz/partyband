@@ -16,7 +16,6 @@ class CreateFederacaosTable extends Migration
         Schema::create('federacaos', function (Blueprint $table) {
             $table->id();
             $table->string('uf');
-            $table->timestamps();
         });
     }
 

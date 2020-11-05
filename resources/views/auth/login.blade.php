@@ -34,11 +34,11 @@
             <h2>LOGIN</h2>
            <div class="form">
             @if (\Session::has('danger'))
-            <div class="alert alert-danger">
-                <ul>
-                    <li>{!! \Session::get('danger') !!}</li>
-                </ul>
-            </div>
+                <div class="alert alert-danger">
+                    <ul>
+                        <li>{!! \Session::get('danger') !!}</li>
+                    </ul>
+                </div>
             @endif
             <form method="POST" action="{{ route('login') }}">
                 @csrf
@@ -48,7 +48,7 @@
                         value="{{ old('username') }}">
 
                     @error('username')
-                    <span class="invalid-feedback msg-error" role="alert">
+                    <span class="invalid-feedback " role="alert">
                         <strong>{{ $message }}</strong>
                     </span>
                     @enderror
@@ -58,7 +58,7 @@
                         class="input_pb @error('password') is-invalid @enderror" name="password"
                         >
                     @error('password')
-                    <span class="invalid-feedback msg-error" role="alert">
+                    <span class="invalid-feedback " role="alert">
                         <strong>{{ $message }}</strong>
                     </span>
                     @enderror

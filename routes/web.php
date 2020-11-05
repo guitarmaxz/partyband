@@ -58,6 +58,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/perfil', 'HomeController@perfil')->name('perfil');
     Route::put('/senha', 'HomeController@updateSenha')->name('updatesenhaa');
     Route::put('/dados', 'HomeController@update')->name('update');
+    Route::get('/delete/completo', 'HomeController@destroy')->name('destroy');
 
 }); 
 

@@ -25,8 +25,8 @@ class CadastroRequest extends FormRequest
     {
         return [
             'nome' => 'required',
-            'telefone' => 'required',
             'biografia' => 'required',
+            'cidade' => 'required',
         ];
         
     }

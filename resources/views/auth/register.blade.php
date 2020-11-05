@@ -41,7 +41,7 @@
                                  name="username"
                                 value="{{ old('username') }}" placeholder="Insira um usuário" >
                                 @error('username')
-                                <span class="invalid-feedback msg-error" role="alert">
+                                <span class="invalid-feedback " role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                                 @enderror
@@ -54,7 +54,7 @@
                                 value="{{ old('email') }}">
 
                             @error('email')
-                            <span class="invalid-feedback msg-error" role="alert">
+                            <span class="invalid-feedback " role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
                             @enderror
@@ -67,14 +67,14 @@
                                 value="{{ old('password') }}" placeholder="Insira sua senha">
 
                             @error('password')
-                            <span class="invalid-feedback msg-error" role="alert">
+                            <span class="invalid-feedback " role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
                             @enderror
                            
                         </div>
 
-                        <div class="form-group row">
+                        <div class="form-group ">
                             <input id="password-confirm" type="password" class="input_pb"
                                     name="password_confirmation" placeholder="Confirmar senha">
                         

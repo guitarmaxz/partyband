@@ -20,26 +20,22 @@
 <!--Coded with love by Mutiullah Samim-->
 <body>
     <main>
-    <div class="bg-lateral-perfil">
-        <div class="contem-cards">
-           <div class="cards c1"></div>
-           <div class="cards c2"></div>
-           <div class="cards c3"></div>
+        <div class="bg-lateral-perfil">
+        
         </div>
-    </div>
 
         <div class="contem-form-perfil">
-            <h1>PERFIL</h1>
+            <h1 class="titulo">PERFIL</h1>
             <form method="POST" action="{{ route('cadastro.store') }}" enctype="multipart/form-data">
-                @csrf
-                <label class=newbtn>
-                    <img id="blah" src="http://placehold.it/120x120" class="ft-perfil">
-                        <input id="pic" class='pis' onchange="readURL(this);" type="file" name="pic">                  
+            @csrf
+            <div class="ft">
+                <label class=newbtn >
+                    <img id="blah" src="http://placehold.it/120x120" class="ft-perfil ">
+                    <input id="pic" class='pis' onchange="readURL(this);" type="file" name="pic">                  
                 </label>
-                
-                <div class="content">
-                <div class="contem-inputs">
-                    
+            </div>
+               
+
                 <div class="grp-input nome">
                         <label for="">Nome</label>
                         <input class="input_pb form-control @error('nome') is-invalid @enderror" name="nome"
@@ -53,7 +49,7 @@
                     
                 <div class="grp-input sexo" >
                         <label for="">sexo</label>
-                        <select name="sexo" id="sexo" class="form-control" style="width:100%" >
+                        <select name="sexo" id="sexo" class="form-control select_pb" style="width:100%" >
                             <option selected>Selecione</option>
                             <option id="Masculino">Masculino</option>
                             <option id="Feminino">Feminino</option>
@@ -61,33 +57,32 @@
                 </div>
 
                 <div class="grp-input cidade">
-                        <label for="">Telefone</label>
-                        <input id="telefone" type="text"
-                                            class="input_pb form-control @error('telefone') is-invalid @enderror" name="telefone"
-                                            value="{{ old('telefone') }}" onkeyup="mascara('(##) #####-####',this,event,true)">
+                        <label for="">Cidade</label>
+                        <input id="cidade" type="text"
+                                            class="input_pb form-control @error('cidade') is-invalid @enderror" name="cidade"
+                                            value="{{ old('cidade') }}">
 
-                                        @error('telefone')
+                                        @error('cidade')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                         @enderror
                 </div>
 
+               
+
                 <div class="grp-input estado" >
                         <label for="">Estado</label>
-                        <select name="federacao" class="form-control"  required >
+                        <select name="federacao" class="form-control select_pb"  required >
                             @foreach ($federacao as $dados)
                                 <option value="{{$dados->id}}">{{$dados->uf}}</option>
                             @endforeach
                         </select>  
                 </div>
 
-                <div class="grp-input email">
-                        <label for="">E-mail</label>
-                        <input class="input_pb " type="text">
-                </div>
+             
                 
-                <div class="grp-input biografia">
+                <div class="grp-input bio">
                 <label for="">Biografia</label>
                 <textarea class=" input_pb form-control @error('biografia') is-invalid @enderror" name="biografia" id="biografia" value="{{ old('biografia') }}" rows="3" style="width:100%" ></textarea>
                         @error('biografia')
@@ -97,7 +92,7 @@
                         @enderror
                 </div>
                 
-                <div class="grp-input instrumento">
+                <div class="grp-input instrumentos">
                         <label for="">Instrumento</label>
                         <select name="instrumento[]" class="form-control grp-input" required   multiple>
                             @foreach ($instrumentos as $dados)
@@ -115,18 +110,15 @@
                         </select>  
                 </div>
 
-                <div class="cotem-btn-perfil">
-                    <button type="submit" class="btn_pb">
-                    {{ __('Gerar Perfil') }}
+                  
+                    <button type="submit" class="btn_pb botao">
+                    {{ __('GERAR PERFIL') }}
                     </button>
-                    <a href="{{route('logout')}}" class="text-center">Voltar</a>
-                </div>
-                    
-                </div>
-
+                    <!--<a href="{{route('logout')}}" class="text-center">Voltar</a>-->
+                
             </form>
+            
         </div>
-        
     </main>
 
     <script src="{{asset('js/mascara.js')}}"></script>

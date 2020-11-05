@@ -61,27 +61,33 @@ main{
 }
 
 .form {
-    width: 500px;
+    width: 50%;
     height: 450px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
+.form form {
+    width: 100%;
+}
+
 .input_pb {
  
-  width: 400px;
+  width: 100%;
   height: 45px;
   margin: 0 auto;
   padding: 1.5rem 2rem;
   border-radius: 1.5rem;
   border-color: rgba(0,0,0,0.4);
   outline: 0;
+  margin-bottom: 5px;
 }
 
 .btn_pb {
-    width: 400px;
-    height: 80px;
+    margin-top: 10px;
+    width: 100%;
+    padding: 10px;
     font-family: Impact;
     background-color:  #FF5656;
     font-size: 40px;
@@ -94,11 +100,6 @@ main{
     transform: scale(1.1);
     background-color: #e74c3c;
     outline: none;
-}
-.msg-error{
-    margin-left: 50px;
-    padding: 0;
-    top:  60px;
 }
 .bg-lateral-musico{
     width: 50vw;
@@ -116,131 +117,30 @@ main{
         height: 100vh;
         padding: 50px;
     }
+    .contem-form H2 {
+        font-size: 50px;
+    }
+    .form{
+        width: 100%;
+    }
   }
-
   .bg-lateral-perfil{
     width: 50vw;
-    height: 100vh;
+    height: 150vh;
+    background-image: url("../imgs/bg-musicos.png");
     background-size: cover;
     background-repeat: no-repeat;
     display: flex;
     justify-content: center;
   }
 
-  .cotem-cards{
-      position: fixed;
-  }
 
-  .cards{
-    background-size: cover;
-    background-repeat: no-repeat;
-  }
-
-  .c1 {
-      width: 400px;
-      height: 600px;
-      position: absolute;
-      margin-top: 300px;
-      z-index: 2;
-      transform: rotate(-20deg);
-      left: 100px;
-      background-image: url("../imgs/mgirl.jpg");
-  }
-
-  .c2{
-    width: 400px;
-    height: 500px;
-    position: absolute;
-    transform: rotate(10deg);
-    margin-top: 100px;
-    z-index: -1;
-    left: 230px;
-    background-image: url("../imgs/m2.jpg");
-  }
-
-  .c3{
-    width: 450px;
-    height: 500px;
-    position: absolute;
-    transform: rotate(20deg);
-    margin-top: 400px;
-    z-index: 1;
-    left: 400px;
-    background-image: url("../imgs/m3.jpg");
-  }
 .contem-form-perfil{
     width: 50vw;
     height: 100vh;
     display: flex;
     align-items: center;
     flex-direction: column;
-}
-.contem-form-perfil H1{
-    font-family: Impact;
-    font-size: 80px;
-}
-.contem-form-perfil form{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-
-}
-  .content{
-      width: 80%;
-      height: 200px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-  }
-
-.nome{
-    grid-area: nome;
-}
-.sexo{
-    grid-area: sexo;
-}
-.cidade{
-    grid-area: cidade;
-}
-.estado{
-    grid-area: estado;
-}
-.email{
-    grid-area: email;
-}
-.biografia{
-    grid-area: biografia;
-}
-.instrumento{
-    grid-area: instrumento;
-}
-.generos{
-    grid-area:  generos;
-}
-.cotem-btn-perfil{
-    grid-area: cotem-btn-perfil;
-}
-.contem-inputs{
-    width: 700px;
-    height: 100%;
-    display: grid;
-    grid-template-areas:
-    "nome nome sexo"
-    "cidade cidade estado"
-    "email email email"
-    "biografia biografia biografia"
-    "instrumento instrumento instrumento"
-    "generos generos generos"
-    "cotem-btn-perfil cotem-btn-perfil cotem-btn-perfil";
-}
-.contem-inputs input{
-    width: 100%;
-    
-}
-
-.grp-input{
-    padding: 10px;
 }
 
 .ft-perfil{
@@ -249,57 +149,89 @@ main{
     height: 500px;
     transform: scale(1.5, 1.5);
 }
-
-.cotem-btn-perfil{
-    padding: 10px;
-    width: 100%;
-    height: auto;
+.titulo{
+    font-family: Impact;
+    font-size: 80px;
+}
+.nome{
+    grid-area: nome;
+}
+.sexo{
+    grid-area: sexo;
+}
+.telefone{
+    grid-area: telefone;
+}
+.bio{
+    grid-area: bio;
+}
+.generos{
+    grid-area: generos;
+}
+.instrumentos{
+    grid-area: instrumentos;
+}
+.estado{
+    grid-area: estado;
+}
+.cidade{
+    grid-area: cidade;
+}
+.botao{
+    grid-area: botao;
+}
+.ft{
+    grid-area: ft;
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
 }
 
-@media only screen and (max-width: 1500px) {
+.contem-form-perfil form{
+    width: 80%;
+    display: grid;
+    grid-template-areas:
+    "ft ft ft" 
+    "nome nome sexo"
+    "cidade cidade estado"
+    "telefone telefone telefone"
+    "bio bio bio"
+    "instrumentos instrumentos instrumentos"
+    "generos generos generos"
+    "botao botao botao";
+}
+
+
+.grp-input{
+    margin: 10px;
+}
+
+.select_pb{
+    width: 100%;
+    height: 50px;
+    margin: 0 auto;
+    border-radius: 1.5rem;
+    border-color: rgba(0,0,0,0.4);
+    outline: 0;
+  
+}
+@media only screen and (max-width: 850px) {
     .bg-lateral-perfil{display: none;}
     .contem-form-perfil{
         width: 100vw;
         height: 100vh;
-        padding: 150px;
-    }
-    .contem-inputs{
+        padding: 15px;
         
     }
-
-  
+    .grp-input{
+        width: 100%;
+    }
+    .contem-form-perfil form{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column; 
+    }
   }
-
-
-  @media only screen and (max-width: 1700px) {
-    .c1{
-        transform: scale(0.8,0.8) rotate(-20deg);
-    }
-    .c2{
-        transform: scale(0.8,0.8) rotate(10deg);
-    }
-    .c3{
-        transform: scale(0.8,0.8) rotate(20deg);
-    }
-  
-  }
-  @media only screen and (max-width: 1600px) {
-    .c1{
-        transform: scale(0.6,0.6) rotate(-20deg);
-    }
-    .c2{
-        transform: scale(0.6,0.6) rotate(10deg);
-    }
-    .c3{
-        transform: scale(0.6,0.6) rotate(20deg);
-    }
-  
-  }
-
-  
-
  

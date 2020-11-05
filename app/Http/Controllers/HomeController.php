@@ -46,11 +46,11 @@ class HomeController extends Controller
             $usuarios = DB::table('users')
                             ->join('musicos', 'users.id', '=', 'musicos.user_id')
                             ->join('federacaos', 'musicos.fed_id', '=', 'federacaos.id')
-                                ->select('users.username', 'musicos.perfil', 'musicos.user_id', 'federacaos.uf')->where('users.perfil', '=', 'Comum')
+                                ->select('users.username', 'musicos.foto', 'musicos.user_id', 'federacaos.uf')->where('users.perfil', '=', 'Comum')
                                 ->orderBy('users.id', 'DESC')
                                 ->paginate(3);
             /* $postagens = DB::table('posts')->select('user_id', 'postagem', 'imagem')->orderBy('id', 'DESC'); */
-            $query = DB::select('SELECT u.username, m.perfil, p.postagem, p.imagem, p.user_id FROM users u LEFT JOIN posts p on(u.id = p.user_id) INNER JOIN musicos m on(m.user_id = u.id) WHERE p.user_id = u.id ORDER BY p.id DESC');
+            $query = DB::select('SELECT u.username, m.user_id, m.foto, p.postagem, p.imagem, p.usuario_id, p.created_at FROM users u LEFT JOIN posts p on(u.id = p.usuario_id) INNER JOIN musicos m on(m.user_id = u.id) WHERE p.usuario_id = u.id ORDER BY p.created_at DESC');
             
             /*$postagens = $postagens->get(); */
             return view('home', compact('usuarios', 'users', 'query'));
@@ -73,12 +73,14 @@ class HomeController extends Controller
         
         }
         else{
-            $generos = Genero::all();  
-            $postagens = DB::table('posts')->select('postagem')->where('user_id', Auth::id());
-        
-            $postagens = $postagens->get();
+            $generos = Genero::all();
+            $musicos = $this->musician->all();  
+            $usuariolog = Auth()->User()->id;
+            $postagens = DB::table('posts')->select('postagem')->where('usuario_id', Auth::id())->get();
             
-            return view('perfil',compact('generos', 'postagens'));   
+        $query = DB::select("SELECT u.username, m.foto, p.postagem, p.imagem, p.usuario_id, m.user_id FROM users u LEFT JOIN posts p on(u.id = p.usuario_id) INNER JOIN musicos m on(m.user_id = u.id) WHERE u.id = '{$usuariolog}' ");
+                                
+            return view('perfil',compact('generos', 'postagens', 'query', 'musicos'));   
         }
     }
 
@@ -97,6 +99,21 @@ class HomeController extends Controller
 
         //GENERO
         $users->generos()->sync($request['genero']);
+
+        //IMAGEM
+        if($request->file('pic') == null)
+        {
+            $users->foto = $users->foto;
+        }
+        else{
+           
+            Storage::deleteDirectory('perfil/'. $usuari);
+            $users->foto = $request->file('pic')->getClientOriginalName(); 
+            $request->file('pic')->storeAs('perfil/'. $usuari, $users->foto);
+            $users->update();
+        }
+
+
 
 	    flash('Dados Atualizados com Sucesso!')->success();
 	    return redirect()->route('perfil');
@@ -161,7 +178,7 @@ class HomeController extends Controller
 
         /* $query = "SELECT u.name FROM instrumentos i, users u, instrumento_user iu WHERE i.id = iu.instrumento_id AND u.id = iu.user_id AND i.descricao LIKE '%{$search}%'"; */
 
-        $query = "SELECT u.nome FROM instrumentos i, musicos u, instrumentos_musicos iu WHERE i.id = iu.inst_id AND u.id = iu.musico_id AND i.descricao LIKE '{$search}%'";
+        $query = "SELECT * FROM `musicos` WHERE nome LIKE '{$search}%'";
         $posts = DB::select($query);
 
         return view('pesquisa', ['posts' => $posts]);
@@ -182,9 +199,11 @@ class HomeController extends Controller
     public function postar(PerfilRequest $request)
     {  
         $post = new Post();
-        $post->user_id = Auth::id();
+        $post->usuario_id = Auth::id();
+       
         $post->postagem = $request->postagem;
         $post->imagem = $request->file('imagem')->getClientOriginalName();
+    
         
         $request->file('imagem')->storeAs(
             'postagem/' . Auth()->User()->id, $post->imagem);
@@ -197,5 +216,18 @@ class HomeController extends Controller
         return redirect()->route('home');
 
     }  
+
+    public function destroy()
+    {
+        if (Auth::user()) {
+
+            User::destroy(Auth::user()->id);
+
+            flash('Seu perfil foi deletado com Sucesso!')->success();
+            return redirect()->route('login');
+        } else {
+            return redirect()->route('login');
+        }
+    }
     
 }

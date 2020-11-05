@@ -7,8 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Federacao extends Model
 {
     protected $table = 'federacaos';
+    public $timestamps = false;
     protected $fillable = [
-        'descricao'
+        'uf'
     ];
 
     public function users()

@@ -8,35 +8,63 @@ Meu Perfil
         margin-top: 5.3em;
     }
 
-    .post{
-            width:200px;
-            height:150px;
-            background-color:red;
-            margin-bottom: 50px;
-        };
-    
+    .post {
+        width: 200px;
+        height: 150px;
+        background-color: red;
+        margin-bottom: 50px;
+    }
+
+    ;
 
 </style>
 <div class="container distancia">
     <div class="row">
         <div class="col-sm-3 text-center ">
-            
-            @if(auth()->user()->image != null)
-            <img class="foto_user rounded-circle" src="{{asset('/storage/users/auth()->user()->image') }}" alt="">
-            @else
-            <img class="foto_user rounded-circle" src="{{asset('/imgs/banda.jpg') }}" alt="">
-            @endif
+           
+            <img class="foto_user rounded-circle" src="@if(Auth()->User()->musicos->foto == "Sem imagem") http://placehold.it/170x170 @else {{asset('storage/perfil/'.Auth()->user()->id. '/' . Auth()->user()->musicos->foto)}} @endif "
+                alt="imagem perfil">
+
+          
+
             <h5 class="item-perfil">{{auth()->user()->musicos->nome}}</h5>
             <span class="item-perfil"></span>
             <h6 class="item-perfil" data-toggle="modal" data-target="#PerfilModal"><a>Editar Perfil</a></h6>
             <h6 class="item-perfil" data-toggle="modal" data-target="#PerfilModalSenha"><a>Editar Senha</a></h6>
             <a href="#" class="nav-link text-decoration-none"
-                                onclick="event.preventDefault(); document.querySelector('form.logout').submit();">Sair</a>
-                           
-                            <form action="{{route('logout')}}" class="logout" method="post" style="display:none;">
-                                @csrf
-                             </form> 
+                onclick="event.preventDefault(); document.querySelector('form.logout').submit();">Sair</a>
+
+            <form action="{{route('logout')}}" class="logout" method="post" style="display:none;">
+                @csrf
+            </form>
+            <!-- Button trigger modal -->
+            <a href="#" class="nav-link" data-toggle="modal" data-target="#modelId">Excluir Perfil</a>
+
+            <!-- Modal -->
+            <div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Excluir Currículo</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            Deseja realmente excluir seu Perfil?
+                        </div>
+                        <div class="modal-footer">
+                            <a href="{{ route('destroy') }}" class="btn btn-md btn-danger" id="modal-btn-si">Sim</a>
+                            <a href="{{ route('perfil') }}" class="btn btn-md botaoMaster" id="modal-btn-no">Não</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+
+
+
         <div class="modal fade" id="PerfilModalSenha" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
             aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -51,7 +79,7 @@ Meu Perfil
                         <form action="{{route('updatesenhaa')}}" method="post">
                             @csrf
                             @method('PUT')
-                           
+
                             <div class="form-group col-8 mx-auto my-4">
                                 <label for="senhaa">Senha atual</label>
                                 <input type="password" id="old_password" placeholder="senha atual"
@@ -93,10 +121,10 @@ Meu Perfil
                 </div>
             </div>
         </div>
-        
+
         <div class="col-sm-9">
             <div class="card">
-              
+
                 <h5 class="card-title">Biografia:</h5>
                 <div class="card card-perfil">
                     <p class="card-text">{{auth()->user()->musicos->biografia}}</p>
@@ -112,29 +140,23 @@ Meu Perfil
                         </div>
                     </div>
                 </div>
-                <div class = "mt-5">
-            
+                <div class="mt-5">
+
                     <p>Publicações:</p>
-                    <div class = "d-flex flex-wrap text-center">
-                        <div class="text-center">
-                            @foreach ($postagens as $dados)
+                    <div class="d-flex flex-wrap text-center">
+
+
+                        @foreach ($query as $dados)
+                        @if($dados->postagem == null)
+                        <p>Sem postagem</p>
+                        @else
+                        <div class="mx-3 post">
+                            <img src="{{asset('storage/postagem/'.$dados->usuario_id. '/' . $dados->imagem)}}" alt=""
+                                style="width:100%; height:100%">
                             {{$dados->postagem}}
-                            @endforeach
-                           
                         </div>
-
-
-                            <div class = "mx-3 post">
-                                <img src="{{asset('imgs/banda.jpg')}}" alt="" style = "width:100%; height:100%">
-                            </div>
-    
-                            <div class = " post">
-                                <img src="{{asset('imgs/post1.jpg')}}" alt="" style = "width:100%; height:100%">
-                            </div>
-    
-                            <div class = "mx-3 post">
-                                <img src="{{asset('imgs/post4.jpg')}}" alt="" style = "width:100%; height:100%">
-                            </div>
+                        @endif
+                        @endforeach
                     </div>
                 </div>
             </div>
@@ -149,28 +171,42 @@ Meu Perfil
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    <div class="row">
-                        <div class="col-sm-2">
-                            <img class="foto_user_alterar rounded-circle" src="{{asset('/imgs/banda.jpg') }}" alt="">
-                        </div>
-                        <div class="col-sm-10">
-                            <span class="perfil_name_alterar">{{auth()->user()->musicos->nome}}</span><br>
 
-                            <label id="perfil_label_alterarfoto" for='selecao-arquivo'>Alterar Foto</label>
-                            <input id='selecao-arquivo' name='image' type='file'>
-                        </div>
 
-                    </div>
+                    
+                 
+                        
+    
 
-                <form class="perfil_form" action="{{route('update')}}" method="POST">
+                    <form class="perfil_form" action="{{route('update')}}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
+
+                       
+
+                        <label class="newbtn">
+                            <img id="blah" src="@if($dados->foto == "Sem imagem") http://placehold.it/170x170 @else {{asset('storage/perfil/'.Auth()->user()->id. '/' . Auth()->user()->musicos->foto)}} @endif " class="img-fluid shadow border border-dark">
+                          
+                            <input id="pic" class='pis' onchange="readURL(this);" type="file" name="pic">  
+                            <br>
+                            <p class="text-center">Foto de perfil</p>
+                            @error('pic')
+                                <div class="invalid-feedback">
+                                    {{$message}}
+                                </div>
+                            @enderror
+                        </label>
+
+                 
+
+
+
                         <div class="form-row">
                             <div class=" col-md-6">
                                 <div class="form-group row">
                                     <label for="nome" class="col-sm-3 col-form-label">Nome:</label>
                                     <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="nome" name="nome"
+                                        <input type="text" class="form-control" id="nome" name="nome"
                                             value="{{auth()->user()->musicos->nome}}">
                                     </div>
                                 </div>
@@ -196,7 +232,7 @@ Meu Perfil
                                     <div class="row">
                                         <div class="col-sm-12 text-center">
                                             <h5 class="">Generos:</h5>
-                                           
+
                                             @foreach ($generos as $genero)
                                             @if(auth()->user()->musicos->generos->contains($genero))
                                             <div class="form-check form-check-inline" style="width:28%">
@@ -214,7 +250,7 @@ Meu Perfil
                                             </div>
                                             @endif
                                             @endforeach
-                                       
+
                                         </div>
                                     </div>
                                 </div>
@@ -222,7 +258,7 @@ Meu Perfil
                             <button type="submit" class="btn btn-primary">Salvar</button>
                     </form>
 
-                  
+
 
 
                 </div>
@@ -230,6 +266,6 @@ Meu Perfil
         </div>
 
 
-        </div>
+    </div>
 
-        @endsection
+    @endsection
