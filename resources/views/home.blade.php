@@ -15,110 +15,181 @@
 
 </style>
 
-<div class="container-fluid bg-light text-center distancia">
-        <div class="row">
-        <div class="col-sm-2 lateral1">
-            <div class="position-fixed mt-5" data-toggle="modal" data-target="#addPost">
-                <a href="#"><img style="width: 100px; height: 100px" src="{{asset('imgs/ico/add.png')}}"class="img-fluid"></a>
-            </div>
-        </div>
-
-        <div class="modal fade" id="addPost" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Post</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                <form action="{{route('postar')}}" method="POST" enctype="multipart/form-data">
-                    @csrf
-                        <div class="form-group">
-                            <input type="file" name="imagem" class="@error('imagem') is-invalid @enderror">
-                            @error('imagem')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                          <label for="post">Escreva uma postagem</label>
-                          <textarea class="form-control @error('postagem') is-invalid @enderror" name="postagem" id="postagem" rows="3" value="{{old('postagem')}}"></textarea>
-                          @error('postagem')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                        </div>  
-                        
-                        <button type="submit">Enviar</button>
-                </form>
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                </div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="col-sm-6 overflow-auto">
-            
-                
-            @foreach ($query as $dados)
-            <div class="card mb-3">
-                
-                <div class="card-body " style="height:100px">
-                    <div class="d-flex flex-row bd-highlight mb-3">
-                        
-                        <div class="p-2 bd-highlight" style="margin-top: -25px; margin-left: -30px"> 
-                        <img src="{{asset('storage/perfil/'.$dados->user_id. '/' . $dados->foto)}}" alt="perfil" class=" img-fluid rounded-circle p-3" style="width:100px; height: 100px">
-                        </div>
-                    <div class="p-2 bd-highlight" style="margin-top: 20px; margin-left: -10px">{{$dados->username}}</div>
-                    </div>
-                </div>
-                <img class="card-img-top" src="{{asset('storage/postagem/'. $dados->usuario_id . '/' . $dados->imagem)}}" alt="Card image cap">
-                <div class="card-body" style="min-height:150px;">
-                    <div class="d-flex flex-row bd-highlight mb-3">
-                        <div class="p-2 bd-highlight" style="width:50px; height:70px"> <i style='font-size:30px'
-                            class='far'>&#xf075;</i></div>
-                        <div class="p-2 bd-highlight" style="width:50px; height:70px"> <i style='font-size:30px'
-                                class='far'>&#xf075;</i></div>
-                        <div class="p-2 bd-highlight" style="width:50px; height:70px"> <i class='far fa-paper-plane'
-                                style='font-size:30px'></i></div>
-                    </div>
-                <p class="card-text text-justify">{{$dados->postagem}}</p>
-                <p class="card-text"><small class="text-muted">postado: {{$dados->created_at}}</small></p>
-                </div>
-               
-            </div>
-            @endforeach
-            
-        </div>
-
-        
-        <div class="col-sm-4 lateral2">
-            <div class="d-flex flex-column bd-highlight mb-3">
-                @foreach ($usuarios as $dados)
-                <div class="p-2 bd-highlight mr-auto d-flex">
-                    <div class="container" style="width:100px; height: 100px;">
-                        <img src="{{asset('storage/perfil/'.$dados->user_id. '/' . $dados->foto)}}" alt="perfil" class=" img-fluid rounded-circle p-2" style="width:100px; height: 100px">
-                    </div>
-                    <div class="mt-5">
-                    <p>
-                        Usuario: <a href="#">{{$dados->username}}</a>
-                    </p>
-                    <p>
-                        Estado: <a href="#">{{$dados->uf}}</a>
-                    </p>
-                   
-                    </div>
-                </div>
-                @endforeach
-            </div>
-        
+<div class="main">
+    <div class="add">
+        <div class="content-ico" data-toggle="modal" data-target=".bd-example-modal-lg">
+            <img class="fotos" src="{{asset('imgs/ico/add-cinza.png')}}"  alt="add">
+            <img class="fotos add-red" src="{{asset('imgs/ico/add-red.png')}}" alt="add">
         </div>
     </div>
-</div>
+
+    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content center">
+                <H1>POSTAR</H1>
+                <form class="form-modal " runat="server">
+                    <input id="imgInp" style="display: none;" type="file"/>
+                    <div class="add-post-img">
+                        <div class="foto-post-modal" id="foto-post-modal">
+                            <img class="fotos" id="blah" src="{{asset('imgs/ico/camera.png')}}" alt="foto de perfil">
+                        </div>
+                    </div>
+                </form>
+                
+                <div class="text-post-modal">
+                    <textarea name="text-post" id="" class="textarea-post" placeholder="Adicione um comentario ao seu Post"></textarea>
+                </div>
+                <button class="btn_modal">POSTAR</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="post">
+        <div class="content-post">
+            <div class="content-user">
+                <div class="foto-perfil-post">
+                    <img src="{{asset('imgs/perfil5.jpg')}}" alt="foto de perfil">
+                </div>
+
+                <div class="nome">
+                    <h5>Aline Faria</h5>
+                </div>
+            </div>
+
+            <div class="foto-post">
+                <img class="fotos" src="{{asset('imgs/mgirl.jpg')}}" alt="foto de perfil">
+            </div>
+            <div class="like">
+
+            </div>
+            <div class="texto-post">
+                <p>
+                    Venhão conferir o show da banda Los Pablitos, amanhã as 22:00 no shoping de jau
+                    Venhão conferir o show da banda Los Pablitos, amanhã as 22:00 no shoping de jau
+                    Venhão conferir o show da banda Los Pablitos, amanhã as 22:00 no shoping de jau
+                    Venhão conferir o show da banda Los Pablitos, amanhã as 22:00 no shoping de jau
+                    Venhão conferir o show da banda Los Pablitos, amanhã as 22:00 no shoping de jau
+                </p>
+            </div>
+
+            <span>Postado em 06/11/2020 as 23:49</span>
+        </div>
+        <div class="content-post">
+            <div class="content-user">
+                <div class="foto-perfil-post">
+                    <img src="{{asset('imgs/perfil3.jpg')}}" alt="foto de perfil">
+                </div>
+
+                <div class="nome">
+                    <h5>Matheus da Silva</h5>
+                </div>
+            </div>
+
+            <div class="foto-post">
+                <img class="fotos" src="{{asset('imgs/background2.jpg')}}" alt="foto de perfil">
+            </div>
+
+            <div class="texto-post">
+                <p>
+                    Venhão conferir o show da banda Los Pablitos, amanhã as 22:00 no shoping de jau
+                    Venhão conferir o show da banda Los Pablitos, amanhã as 22:00 no shoping de jau
+                    Venhão conferir o show da banda Los Pablitos, amanhã as 22:00 no shoping de jau
+                </p>
+            </div>
+            <span>Postado em 06/11/2020 as 23:49</span>
+        </div>
+    </div>
+    
+    <div class="perfils">
+   
+        <div class="content-perfils">
+            <div class="content-perfil">
+                <div class="foto-perfil">
+                    <img class="fotos circulo" src="{{asset('imgs/perfil5.jpg')}}" alt="foto de perfil">
+                </div>
+
+                <div class="nome">
+                    <h5>Aline Faria</h5>  
+                </div>
+            </div>
+
+            <div class="content-perfil">
+                <div class="foto-perfil">
+                    <img class="fotos circulo" src="{{asset('imgs/perfil.jpg')}}" alt="foto de perfil">
+                </div>
+
+                <div class="nome">
+                    <h5>Roberto Magnus</h5>    
+                </div>
+            </div>
+
+            <div class="content-perfil">
+                <div class="foto-perfil">
+                    <img class="fotos circulo" src="{{asset('imgs/perfil.jpg')}}" alt="foto de perfil">
+                </div>
+
+                <div class="nome">
+                    <h5>Matheus Nascimento</h5>                  
+                </div>
+            </div>
+
+            <div class="content-perfil">
+                <div class="foto-perfil">
+                    <img class="fotos circulo" src="{{asset('imgs/perfil3.jpg')}}" alt="foto de perfil">
+                </div>
+
+                <div class="nome">
+                <h5>Gabriel Almeida</h5>   
+                </div>
+            </div>
+
+            <div class="content-perfil">
+                <div class="foto-perfil">
+                    <img class="fotos circulo" src="{{asset('imgs/perfil4.jpg')}}" alt="foto de perfil">
+                </div>
+
+                <div class="nome">
+                    <h5>Roberta Pereira</h5>         
+                </div>
+            </div>
+
+            <div class="content-perfil">
+                <div class="foto-perfil">
+                    <img class="fotos circulo" src="{{asset('imgs/perfil5.jpg')}}" alt="foto de perfil">
+                </div>
+
+                <div class="nome">
+                    <h5>Jessica Faria</h5>        
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                
+                reader.onload = function(e) {
+                $('#blah').attr('src', e.target.result);
+                }
+                
+                reader.readAsDataURL(input.files[0]); // convert to base64 string
+            }
+            }
+
+            $("#imgInp").change(function() {
+            readURL(this);
+        });
+
+        $(document).ready(function(){
+            $("#foto-post-modal").click(function(){
+            self.executar();
+            });
+        });
+
+        function executar(){
+        $('#imgInp').trigger('click');
+        }
+    </script>
 </div>
 @endsection
