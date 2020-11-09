@@ -53,6 +53,7 @@
                     </span>
                     @enderror
                 </div>
+                
                 <div class="input-group mb-2">
                     <input id="password" type="password" placeholder="Sua Senha"
                         class="input_pb @error('password') is-invalid @enderror" name="password"

@@ -9,7 +9,7 @@
     <link rel="stylesheet" type="text/css" href="{{asset('css/custom.css')}}">
     <script type="text/javascript" src="{{asset('js/jquery.js')}}"></script>
     <script type="text/javascript" src="{{asset('js/app.js')}}"></script>
-    <title>Document</title>
+    <title>@yield('title')</title>
 </head>
 <body>
 

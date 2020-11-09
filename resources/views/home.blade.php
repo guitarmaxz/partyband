@@ -1,5 +1,8 @@
 @extends('layouts.menu')
 
+@section('title')
+    PartyBand
+@endsection
 @section('content')
 <style>
     .centered {

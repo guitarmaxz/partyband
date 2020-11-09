@@ -17,6 +17,7 @@
     <!-- Custom styles for this template-->
     <link rel="stylesheet" type="text/css" href="{{asset('css/sb-admin-2.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('css/all.css')}}">
+    <script src="{{asset('vendor/jquery/jquery.min.js')}}"></script>
 
 </head>
 
@@ -183,7 +184,7 @@
     </div>
 
     <!-- Bootstrap core JavaScript-->
-    <script src="{{asset('vendor/jquery/jquery.min.js')}}"></script>
+    
     <script src="{{asset('vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 
     <!-- Core plugin JavaScript-->
@@ -199,6 +200,9 @@
     <script src="{{asset('js/demo/chart-area-demo.js')}}"></script>
     <script src="{{asset('js/demo/chart-pie-demo.js')}}"></script>
     <script src="{{asset('js/all.js')}}"></script>
+    <script src="{{asset('js/mascara.js')}}"></script>
+
+
 
 </body>
 

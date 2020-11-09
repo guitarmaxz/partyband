@@ -46,6 +46,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('generos', 'GeneroController');
         Route::resource('usuarios', 'UserController');
         Route::resource('bandas', 'BandaController');
+        Route::resource('posts', 'PostController');
     }); 
 });
 
