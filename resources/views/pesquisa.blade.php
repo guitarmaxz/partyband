@@ -20,7 +20,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($posts as $post)
+                        @foreach ($busca as $post)
                         <tr>
                         <td scope="row" style="width: 20%;" class="text-center"><img src="{{asset('imgs/ico/icon.png')}}" width="80" alt=""></td>
                             <td scope="row" style="width: 50%;">{{$post->nome}}</td>

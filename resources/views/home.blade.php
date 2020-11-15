@@ -1,8 +1,5 @@
 @extends('layouts.menu')
 
-@section('title')
-    PartyBand
-@endsection
 @section('content')
 <style>
     .centered {
@@ -23,145 +20,118 @@
         </div>
     </div>
 
-    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal fade bd-example-modal-lg ml-post" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content center">
                 <H1>POSTAR</H1>
-                <form class="form-modal " runat="server">
-                    <input id="imgInp" style="display: none;" type="file"/>
+                <form class="form-modal" action="{{route('postar')}}" method="POST" enctype="multipart/form-data" runat="server">
+                    @csrf
+                    <input id="imgInp" style="display: none;" type="file" class="@error('imagem') is-invalid @enderror"
+                        name="imagem" />
+                    @error('imagem')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
                     <div class="add-post-img">
                         <div class="foto-post-modal" id="foto-post-modal">
-                            <img class="fotos" id="blah" src="{{asset('imgs/ico/camera.png')}}" alt="foto de perfil">
+                            <img class="fotos img-modal" id="blah" src="{{asset('imgs/ico/camera.png')}}" alt="foto de perfil">
                         </div>
                     </div>
+
+                    <div class="text-post-modal">
+                        <textarea name="postagem" id="postagem"
+                            class="textarea-post @error('postagem') is-invalid @enderror"
+                            placeholder="Adicione um comentario ao seu Post"></textarea>
+                        @error('postagem')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+                    <button type="submit" class="btn_modal">POSTAR</button>
                 </form>
-                
-                <div class="text-post-modal">
-                    <textarea name="text-post" id="" class="textarea-post" placeholder="Adicione um comentario ao seu Post"></textarea>
-                </div>
-                <button class="btn_modal">POSTAR</button>
             </div>
         </div>
     </div>
 
     <div class="post">
+        @foreach ($query as $item)
+            
+      
         <div class="content-post">
             <div class="content-user">
                 <div class="foto-perfil-post">
-                    <img src="{{asset('imgs/perfil5.jpg')}}" alt="foto de perfil">
+                    <img src="{{asset('storage/perfil/'.$item->user_id. '/' . $item->foto)}}" alt="foto de perfil">
                 </div>
 
                 <div class="nome">
-                    <h5>Aline Faria</h5>
+                <h5>{{$item->username}}</h5>
                 </div>
             </div>
 
             <div class="foto-post">
-                <img class="fotos" src="{{asset('imgs/mgirl.jpg')}}" alt="foto de perfil">
+                <img class="fotos" src="{{asset('storage/postagem/'.$item->user_id. '/' . $item->imagem)}}"" alt="foto de perfil">
             </div>
             <div class="like">
 
             </div>
             <div class="texto-post">
-                <p>
-                    Venhão conferir o show da banda Los Pablitos, amanhã as 22:00 no shoping de jau
-                    Venhão conferir o show da banda Los Pablitos, amanhã as 22:00 no shoping de jau
-                    Venhão conferir o show da banda Los Pablitos, amanhã as 22:00 no shoping de jau
-                    Venhão conferir o show da banda Los Pablitos, amanhã as 22:00 no shoping de jau
-                    Venhão conferir o show da banda Los Pablitos, amanhã as 22:00 no shoping de jau
-                </p>
+                
+                {{$item->postagem}}
             </div>
 
             <span>Postado em 06/11/2020 as 23:49</span>
         </div>
-        <div class="content-post">
-            <div class="content-user">
-                <div class="foto-perfil-post">
-                    <img src="{{asset('imgs/perfil3.jpg')}}" alt="foto de perfil">
-                </div>
-
-                <div class="nome">
-                    <h5>Matheus da Silva</h5>
-                </div>
-            </div>
-
-            <div class="foto-post">
-                <img class="fotos" src="{{asset('imgs/background2.jpg')}}" alt="foto de perfil">
-            </div>
-
-            <div class="texto-post">
-                <p>
-                    Venhão conferir o show da banda Los Pablitos, amanhã as 22:00 no shoping de jau
-                    Venhão conferir o show da banda Los Pablitos, amanhã as 22:00 no shoping de jau
-                    Venhão conferir o show da banda Los Pablitos, amanhã as 22:00 no shoping de jau
-                </p>
-            </div>
-            <span>Postado em 06/11/2020 as 23:49</span>
-        </div>
+        @endforeach
+        
     </div>
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     
     <div class="perfils">
-   
         <div class="content-perfils">
+            
+
+
+            @foreach ($usuarios as $dados)
             <div class="content-perfil">
+
                 <div class="foto-perfil">
-                    <img class="fotos circulo" src="{{asset('imgs/perfil5.jpg')}}" alt="foto de perfil">
+                    <img class="fotos circulo" src="{{asset('storage/perfil/'.$dados->user_id. '/' . $dados->foto)}}"
+                        alt="foto de perfil">
                 </div>
-
                 <div class="nome">
-                    <h5>Aline Faria</h5>  
+                    <h5>{{$dados->nome}}</h5>
                 </div>
+
             </div>
+            @endforeach
 
-            <div class="content-perfil">
-                <div class="foto-perfil">
-                    <img class="fotos circulo" src="{{asset('imgs/perfil.jpg')}}" alt="foto de perfil">
-                </div>
 
-                <div class="nome">
-                    <h5>Roberto Magnus</h5>    
-                </div>
-            </div>
 
-            <div class="content-perfil">
-                <div class="foto-perfil">
-                    <img class="fotos circulo" src="{{asset('imgs/perfil.jpg')}}" alt="foto de perfil">
-                </div>
 
-                <div class="nome">
-                    <h5>Matheus Nascimento</h5>                  
-                </div>
-            </div>
-
-            <div class="content-perfil">
-                <div class="foto-perfil">
-                    <img class="fotos circulo" src="{{asset('imgs/perfil3.jpg')}}" alt="foto de perfil">
-                </div>
-
-                <div class="nome">
-                <h5>Gabriel Almeida</h5>   
-                </div>
-            </div>
-
-            <div class="content-perfil">
-                <div class="foto-perfil">
-                    <img class="fotos circulo" src="{{asset('imgs/perfil4.jpg')}}" alt="foto de perfil">
-                </div>
-
-                <div class="nome">
-                    <h5>Roberta Pereira</h5>         
-                </div>
-            </div>
-
-            <div class="content-perfil">
-                <div class="foto-perfil">
-                    <img class="fotos circulo" src="{{asset('imgs/perfil5.jpg')}}" alt="foto de perfil">
-                </div>
-
-                <div class="nome">
-                    <h5>Jessica Faria</h5>        
-                </div>
-            </div>
         </div>
     </div>
     <script>

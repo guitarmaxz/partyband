@@ -46,7 +46,7 @@ class HomeController extends Controller
             $usuarios = DB::table('users')
                             ->join('musicos', 'users.id', '=', 'musicos.user_id')
                             ->join('federacaos', 'musicos.fed_id', '=', 'federacaos.id')
-                                ->select('users.username', 'musicos.foto', 'musicos.user_id', 'federacaos.uf')->where('users.perfil', '=', 'Comum')
+                                ->select('users.username', 'musicos.foto', 'musicos.user_id', 'federacaos.uf', 'musicos.nome')->where('users.perfil', '=', 'Comum')
                                 ->orderBy('users.id', 'DESC')
                                 ->paginate(3);
             /* $postagens = DB::table('posts')->select('user_id', 'postagem', 'imagem')->orderBy('id', 'DESC'); */
@@ -178,10 +178,10 @@ class HomeController extends Controller
 
         /* $query = "SELECT u.name FROM instrumentos i, users u, instrumento_user iu WHERE i.id = iu.instrumento_id AND u.id = iu.user_id AND i.descricao LIKE '%{$search}%'"; */
 
-        $query = "SELECT * FROM `musicos` WHERE nome LIKE '{$search}%'";
-        $posts = DB::select($query);
+        $busca = DB::select("SELECT * FROM musicos WHERE nome LIKE '{$search}%'");
+      
 
-        return view('pesquisa', ['posts' => $posts]);
+        return view('pesquisa', compact('busca'));
     }
 
     public function show()
@@ -198,6 +198,7 @@ class HomeController extends Controller
 
     public function postar(PerfilRequest $request)
     {  
+        
         $post = new Post();
         $post->usuario_id = Auth::id();
        
@@ -207,6 +208,8 @@ class HomeController extends Controller
         
         $request->file('imagem')->storeAs(
             'postagem/' . Auth()->User()->id, $post->imagem);
+        
+            
         $post->save();
        
        
