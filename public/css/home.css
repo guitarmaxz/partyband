@@ -148,7 +148,7 @@
 }
 .texto-post{
     width: 100%;
-    min-height: 200px;
+    max-height: 200px;
     background-color: white;
     padding: 20px;
 }
@@ -296,4 +296,12 @@
     .img-modal{
         transform: scale(3);
     }
+}
+
+
+.Impact{
+    font-family: Impact;
+}
+.pb-color{
+    color: #FF5656;;
 }

@@ -9,7 +9,6 @@
     .distancia{
         margin-top: 5.3em;
     }
-
 </style>
 
 <div class="main">
@@ -62,7 +61,7 @@
         <div class="content-post">
             <div class="content-user">
                 <div class="foto-perfil-post">
-                    <img src="{{asset('storage/perfil/'.$item->user_id. '/' . $item->foto)}}" alt="foto de perfil">
+                    <img class="fotos"src="{{asset('storage/perfil/'.$item->user_id. '/' . $item->foto)}}" alt="foto de perfil">
                 </div>
 
                 <div class="nome">
