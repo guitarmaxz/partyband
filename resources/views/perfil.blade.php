@@ -44,6 +44,9 @@ Meu Perfil
         transition: 0.5s;
         opacity: 0.8;
     }
+    .pointer{
+        cursor: pointer;
+    }
 </style>
 <div class="container distancia">
     <div class="row">
@@ -56,8 +59,8 @@ Meu Perfil
 
 
             <span class="item-perfil"></span>
-            <h6 class="item-perfil" data-toggle="modal" data-target="#PerfilModal"><a>Editar Perfil</a></h6>
-            <h6 class="item-perfil" data-toggle="modal" data-target="#PerfilModalSenha"><a>Editar Senha</a></h6>
+            <h6 class="item-perfil" data-toggle="modal" data-target="#PerfilModal"><a class="pointer">Editar Perfil</a></h6>
+            <h6 class="item-perfil" data-toggle="modal" data-target="#PerfilModalSenha"><a class="pointer">Editar Senha</a></h6>
             <a href="#" class="nav-link pb-color" data-toggle="modal" data-target="#modelId">Excluir Perfil</a>
             <a href="#" class="nav-link text-decoration-none pb-color" onclick="event.preventDefault(); document.querySelector('form.logout').submit();">Sair</a>
 
@@ -149,8 +152,8 @@ Meu Perfil
                     <p class="card-text">{{auth()->user()->musicos->biografia}}</p>
                 </div>
                 <h5 class="title-perfil Impact">Gêneros Musicais</h5>
-                <div class="item-perfil center">
-                    <div class="row ">
+                <div class="item-perfil">
+                    <div class="row">
                         <div class="col-sm-12 Impact">
                             @foreach (Auth()->User()->musicos->generos as $genero)
                             <input type="button" class="btn btn-light btn-generos" value="{{$genero->descricao}}">

@@ -57,7 +57,7 @@
             </a>
 
            <div class="search-box">
-                <form action="{{route('search')}}" method="post">
+                <form class="form-search" action="{{route('search')}}" method="post">
                     @csrf
                     <input type="text" class="search" placeholder="Pesquisar..." name="search">
                     <input type="submit" hidden>

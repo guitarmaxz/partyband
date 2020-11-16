@@ -6,6 +6,13 @@
     font-family: Impact;
     src: url("../fonts/impact.ttf");
   }
+.form-search{
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 .content-menu{
     width: 100%;
     height: 80px;
