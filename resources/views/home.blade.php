@@ -55,9 +55,16 @@
     </div>
 
     <div class="post">
+        @foreach ($admin as $item)
+        <div class="card m-3">
+            <img class="card-img-top" src="holder.js/100x180/" alt="">
+            <div class="card-body">
+                <h4 class="card-title">COMUNICADO ADMINISTRADOR</h4>
+                <p class="card-text">{{$item->postagem}}</p>
+            </div>
+        </div>
+        @endforeach
         @foreach ($query as $item)
-            
-      
         <div class="content-post">
             <div class="content-user">
                 <div class="foto-perfil-post">
@@ -72,15 +79,13 @@
             <div class="foto-post">
                 <img class="fotos" src="{{asset('storage/postagem/'.$item->user_id. '/' . $item->imagem)}}"" alt="foto de perfil">
             </div>
-            <div class="like">
-
-            </div>
+          
             <div class="texto-post">
                 
                 {{$item->postagem}}
             </div>
 
-            <span>Postado em 06/11/2020 as 23:49</span>
+        <span>{{$item->created_at}}</span>
         </div>
         @endforeach
         

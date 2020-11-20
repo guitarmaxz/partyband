@@ -1,5 +1,6 @@
 <?php
 
+use App\Musico;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -41,6 +42,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('adicionar', 'UserController@adicionarAdmin')->name('adicionar');
         Route::put('senha/atualizar', 'UserController@updateSenha')->name('updatesenha');    
         Route::post('admin/atualizar', 'UserController@addAdmin')->name('store'); 
+        Route::post('admin/postar', 'PostController@postar')->name('postar'); 
         //KRUD   
         Route::resource('instrumentos', 'InstrumentoController');
         Route::resource('generos', 'GeneroController');
