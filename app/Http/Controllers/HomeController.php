@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Genero;
 use App\Http\Requests\PerfilRequest;
+use App\Instrumento;
 use App\Musico;
 use App\Post;
 use Illuminate\Support\Facades\DB;
@@ -173,15 +174,45 @@ class HomeController extends Controller
     {   
         
         $search =  trim(strtoupper($request->input('search')));; 
-        //$posts = DB::table('users')->where('instrumento', 'like', '%'.$search.'%')->paginate(5);  
-        // $query = "SELECT u.name FROM users u JOIN instrumentos i ON u.id = i.id WHERE i.descricao LIKE '%{$search}%'";
 
-        /* $query = "SELECT u.name FROM instrumentos i, users u, instrumento_user iu WHERE i.id = iu.instrumento_id AND u.id = iu.user_id AND i.descricao LIKE '%{$search}%'"; */
+        $musicos = DB::select("SELECT * FROM musicos WHERE nome LIKE '{$search}%'");
+        $instrumentos = DB::select("SELECT IM.musico_id AS idMusico, I.descricao FROM Instrumentos I 
+        INNER JOIN instrumentos_musicos IM ON (I.id=inst_id) 
+        INNER JOIN Musicos M ON(IM.musico_id=M.id) WHERE nome LIKE '{$search}%'");
 
-        $busca = DB::select("SELECT * FROM musicos WHERE nome LIKE '{$search}%'");
-      
-
-        return view('pesquisa', compact('busca'));
+        $generos = DB::select("SELECT GM.musico_id as idMusico, G.descricao  FROM Generos G INNER JOIN generos_musicos GM ON (G.id=GM.genero_id) INNER JOIN Musicos M ON (GM.musico_id=M.id)  WHERE nome LIKE '{$search}%'");
+        $musicoList = array();
+        //$instrumentos = [];
+     
+        foreach($musicos as $key => $musico){
+            
+            $obj = array();
+            $obj = (object) $obj;
+            $obj->id = $musico->id;
+            $obj->user_id = $musico->user_id;
+            $obj->fed_id = $musico->fed_id;
+            $obj->cidade = $musico->cidade;
+            $obj->nome = $musico->nome;
+            $obj->foto = $musico->foto;
+            $obj->biografia = $musico->biografia;
+            $obj->sexo = $musico->sexo;
+            $obj->instrumentos = array();
+            $obj->generos = array();
+            foreach( $instrumentos as $y => $inst){
+               if($musico->id == $inst->idMusico){
+              
+                $obj->instrumentos[$y] = $inst->descricao;
+               }
+            }
+            foreach($generos as $x => $gen){
+                if($musico->id == $gen->idMusico){
+                    $obj->generos[$x] = $gen->descricao;
+                }
+            }
+            $musicoList[$key] = $obj;
+        }
+        //dd($musicoList);
+        return view('pesquisa', compact('musicoList'));
     }
 
     public function show()

@@ -118,9 +118,7 @@
     width: 80px;
     height: 80px;
     background-color: tomato;
-    margin-left: 40px;
     border-radius: 50%;
-    margin-top: 10px;
 }
 .foto-perfil-post img {
     width: 100%;
@@ -212,20 +210,23 @@
   }
 
   @media only screen and (max-width: 1366px) {
-    .content-post{
-        transform: scale(0.8);
-        margin-top: 20px;
-    }
   .content-ico{
       transform: scale(0.8);
   }
   .content-perfils{
       transform: scale(0.85);
       margin-left: 50px;
-      top: -100px;
+      top: 70px;
       margin-top: 180px;
-      
+    
   }
+}
+
+@media only screen and (max-width: 1200px) {
+
+    .content-perfils{
+        transform: scale(0.85);
+    }
 }
 
   @media only screen and (max-width: 1200px) {
