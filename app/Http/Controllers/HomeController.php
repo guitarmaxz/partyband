@@ -47,16 +47,30 @@ class HomeController extends Controller
             $usuarios = DB::table('users')
                             ->join('musicos', 'users.id', '=', 'musicos.user_id')
                             ->join('federacaos', 'musicos.fed_id', '=', 'federacaos.id')
-                                ->select('users.username', 'musicos.foto', 'musicos.user_id', 'federacaos.uf', 'musicos.nome')->where('users.perfil', '=', 'Comum')
+                                ->select('users.username', 'musicos.foto', 'musicos.user_id', 'federacaos.uf', 'musicos.nome')
                                 ->orderBy('users.id', 'DESC')
                                 ->paginate(3);
-            /* $postagens = DB::table('posts')->select('user_id', 'postagem', 'imagem')->orderBy('id', 'DESC'); */
-            $query = DB::select('SELECT u.username, m.user_id, m.foto, p.postagem, p.imagem, p.usuario_id, p.created_at FROM users u LEFT JOIN posts p on(u.id = p.usuario_id) INNER JOIN musicos m on(m.user_id = u.id) WHERE p.usuario_id = u.id ORDER BY p.created_at DESC');
-            
+      
+
+            $query = DB::select('SELECT u.username, u.perfil, m.user_id, m.foto, p.postagem, p.imagem, p.usuario_id, p.created_at FROM users u LEFT JOIN posts p on(u.id = p.usuario_id) INNER JOIN musicos m on(m.user_id = u.id) WHERE p.usuario_id = u.id AND p.status = 2 ORDER BY p.created_at DESC');
+
+         
+
+            $admin = DB::table('users')
+                         ->join('posts', 'users.id', '=', 'posts.usuario_id')
+                         ->select('posts.postagem')
+                         ->where('users.perfil' , '=' , 'Administrador')
+                         ->orderBy('posts.postagem', 'ASC')
+                         ->paginate(1);
+                        
+                         
+          
             /*$postagens = $postagens->get(); */
-            return view('home', compact('usuarios', 'users', 'query'));
+            return view('home', compact('usuarios', 'users', 'query', 'admin'));
         }   
     }
+
+   
 
    
 
@@ -180,6 +194,7 @@ class HomeController extends Controller
         INNER JOIN instrumentos_musicos IM ON (I.id=inst_id) 
         INNER JOIN Musicos M ON(IM.musico_id=M.id) WHERE nome LIKE '{$search}%'");
 
+<<<<<<< HEAD
         $generos = DB::select("SELECT GM.musico_id as idMusico, G.descricao  FROM Generos G INNER JOIN generos_musicos GM ON (G.id=GM.genero_id) INNER JOIN Musicos M ON (GM.musico_id=M.id)  WHERE nome LIKE '{$search}%'");
         $musicoList = array();
         //$instrumentos = [];
@@ -213,6 +228,32 @@ class HomeController extends Controller
         }
         //dd($musicoList);
         return view('pesquisa', compact('musicoList'));
+=======
+        
+       
+        $musicos = DB::select("SELECT m.id, m.user_id, m.foto, m.biografia, m.nome, u.email
+                FROM users u 
+                INNER JOIN musicos m ON(u.id=m.user_id) 
+                WHERE m.nome LIKE '{$search}%'
+                ");
+        foreach($musicos as $musico){
+           
+            $instrumentos = DB::select("SELECT i.descricao FROM  instrumentos_musicos im INNER JOIN instrumentos i ON(im.inst_id=i.id) WHERE musico_id = {$musico->id} ");
+           
+           
+            $object = (object) $instrumentos;
+            $obj_merged = (object) array_merge((array) $musico, (array) $instrumentos);
+         
+        }
+                
+        
+        
+       
+              
+      
+
+        return view('pesquisa', compact('musicos', 'obj_merged'));
+>>>>>>> fea71b7a331ea28838ef7f0060b9867083f551fe
     }
 
     public function show()
@@ -234,6 +275,7 @@ class HomeController extends Controller
         $post->usuario_id = Auth::id();
        
         $post->postagem = $request->postagem;
+        $post->status = 1;
         $post->imagem = $request->file('imagem')->getClientOriginalName();
     
         
@@ -246,7 +288,7 @@ class HomeController extends Controller
        
        
         
-        
+        flash('Postagem enviada para a aprovação!')->success();
         return redirect()->route('home');
 
     }  

@@ -69,6 +69,12 @@
                     <span>Generos</span>
                 </a>
             </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="{{route('admin.posts.index')}}">
+                    <i class="fa fa-calendar" aria-hidden="true"></i>
+                    <span>Postagem</span>
+                </a>
+            </li>
             <!-- Divider -->
             <hr class="sidebar-divider">
             <!-- Sidebar Toggler (Sidebar) -->

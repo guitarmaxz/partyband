@@ -102,7 +102,7 @@
                 </div>
 
                 <div class="grp-input generos">
-                        <label for="">Generos</label>
+                        <label for="">Gêneros</label>
                         <select name="genero[]" class="form-control grp-input" required multiple>
                             @foreach ($generos as $dados)
                                 <option value="{{$dados->id}}">{{$dados->descricao}}</option>

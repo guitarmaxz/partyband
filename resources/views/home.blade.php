@@ -351,7 +351,17 @@
     </div>
 
     <div class="post">
+        @foreach ($admin as $item)
+        <div class="card m-3">
+            <img class="card-img-top" src="holder.js/100x180/" alt="">
+            <div class="card-body">
+                <h4 class="card-title">COMUNICADO ADMINISTRADOR</h4>
+                <p class="card-text">{{$item->postagem}}</p>
+            </div>
+        </div>
+        @endforeach
         @foreach ($query as $item)
+<<<<<<< HEAD
         <section class="hero size-post ">
             <div class="container size-post">
                 <div class="row size-post">
@@ -426,10 +436,18 @@
 
 
                             <!--/ cardbox-like -->
+=======
+        <div class="content-post">
+            <div class="content-user">
+                <div class="foto-perfil-post">
+                    <img class="fotos"src="{{asset('storage/perfil/'.$item->user_id. '/' . $item->foto)}}" alt="foto de perfil">
+                </div>
+>>>>>>> fea71b7a331ea28838ef7f0060b9867083f551fe
 
                         </div>
                         <!--/ cardbox -->
 
+<<<<<<< HEAD
                     </div>
                     <!--/ col-lg-6 -->
 
@@ -438,6 +456,19 @@
             </div>
             <!--/ container -->
         </section>
+=======
+            <div class="foto-post">
+                <img class="fotos" src="{{asset('storage/postagem/'.$item->user_id. '/' . $item->imagem)}}"" alt="foto de perfil">
+            </div>
+          
+            <div class="texto-post">
+                
+                {{$item->postagem}}
+            </div>
+
+        <span>{{$item->created_at}}</span>
+        </div>
+>>>>>>> fea71b7a331ea28838ef7f0060b9867083f551fe
         @endforeach
     </div>
 

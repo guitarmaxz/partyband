@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -24,11 +25,13 @@ class PostController extends Controller
            
             $postagem = DB::table('users')
                             ->join('posts', 'users.id', '=', 'posts.usuario_id')
-                                ->select('users.username', 'posts.postagem', 'posts.usuario_id', 'posts.imagem', 'posts.id')->where('users.perfil', '=', 'Comum')
+                                ->select('users.username', 'posts.postagem', 'posts.usuario_id', 'posts.imagem', 'posts.id')->where('users.perfil', '=', 'Comum')->where('posts.status', '=', 1)
                                 ->orderBy('posts.postagem', 'DESC')
                                 ->paginate(10);
+
+            $admin = DB::select("SELECT p.postagem, p.id FROM users u INNER JOIN posts p on(u.id=p.usuario_id) WHERE u.perfil = 'Administrador'");
             
-            return view('admin.posts.index', compact('postagem'));
+            return view('admin.posts.index', compact('postagem', 'admin'));
         }
         else{
             return redirect()->route('home');
@@ -52,9 +55,16 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function postar(Request $request)
     {
-        //
+        $post = new Post();
+        $post->usuario_id = Auth::id();
+        $post->postagem = $request->postagem;
+        $post->imagem = "Sem imagem";
+        $post->status = 2;
+        $post->save();
+        flash('Postagem postada com Sucesso!')->success();
+        return redirect()->route('admin.posts.index');
     }
 
     /**
@@ -88,7 +98,11 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $postagem = $this->post->find($id);
+        $postagem->status = 2;
+        $postagem->update();
+        flash('Postagem aprovada com Sucesso!')->success();
+        return redirect()->route('admin.posts.index');
     }
 
     /**
@@ -105,4 +119,6 @@ class PostController extends Controller
 	    flash('Postagem do usuario Removida com Sucesso!')->success();
 	    return redirect()->route('admin.posts.index');
     }
+
+    
 }

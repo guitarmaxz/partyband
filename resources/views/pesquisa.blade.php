@@ -59,12 +59,17 @@ h4 {
 }
 </style>
 @section('content')
+<<<<<<< HEAD
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+=======
+
+>>>>>>> fea71b7a331ea28838ef7f0060b9867083f551fe
 <div class="content">
     <div class="container">
         <div class="row">
             <div class="col-sm-4"><a href="#custom-modal" class="btn btn-custom waves-effect waves-light mb-4" data-animation="fadein" data-plugin="custommodal" data-overlayspeed="200" data-overlaycolor="#36404a"><i class="mdi mdi-plus"></i> Add Member</a></div>
             <!-- end col -->
+<<<<<<< HEAD
         </div>
         <!-- end row -->
         
