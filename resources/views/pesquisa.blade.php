@@ -59,17 +59,17 @@ h4 {
 }
 </style>
 @section('content')
-<<<<<<< HEAD
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-=======
 
->>>>>>> fea71b7a331ea28838ef7f0060b9867083f551fe
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+
+
 <div class="content">
     <div class="container">
         <div class="row">
             <div class="col-sm-4"><a href="#custom-modal" class="btn btn-custom waves-effect waves-light mb-4" data-animation="fadein" data-plugin="custommodal" data-overlayspeed="200" data-overlaycolor="#36404a"><i class="mdi mdi-plus"></i> Add Member</a></div>
             <!-- end col -->
-<<<<<<< HEAD
+<
         </div>
         <!-- end row -->
         
@@ -79,10 +79,6 @@ h4 {
             
         <div class="row d-flex flex-row">
         @foreach ($musicoList as $musico) 
-
-        @foreach ($musico as $instrumentos)
-       
-        @endforeach
             <div class="col-lg-4">
                 <div class="text-center card-box">
                     <div class="member-card pt-2 pb-2">
@@ -98,11 +94,13 @@ h4 {
                             <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Twitter"><i class="fa fa-twitter"></i></a></li>
                             <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Skype"><i class="fa fa-skype"></i></a></li>
                         </ul>
-
-                        @foreach ($instrumentos as $instrumento)
+                        @foreach ($musico->instrumentos as $instrumento)
                             <p>{{$instrumento}}</p>
                         @endforeach
-                       
+                        <hr>
+                        @foreach ($musico->generos as $genero)
+                            <p>{{$genero}}</p>
+                        @endforeach
                         <button type="button" class="btn btn-primary mt-3 btn-rounded waves-effect w-md waves-light">Message Now</button>
                         <div class="mt-4">
                             <div class="row">

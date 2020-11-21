@@ -194,7 +194,7 @@ class HomeController extends Controller
         INNER JOIN instrumentos_musicos IM ON (I.id=inst_id) 
         INNER JOIN Musicos M ON(IM.musico_id=M.id) WHERE nome LIKE '{$search}%'");
 
-<<<<<<< HEAD
+
         $generos = DB::select("SELECT GM.musico_id as idMusico, G.descricao  FROM Generos G INNER JOIN generos_musicos GM ON (G.id=GM.genero_id) INNER JOIN Musicos M ON (GM.musico_id=M.id)  WHERE nome LIKE '{$search}%'");
         $musicoList = array();
         //$instrumentos = [];
@@ -227,33 +227,9 @@ class HomeController extends Controller
             $musicoList[$key] = $obj;
         }
         //dd($musicoList);
-        return view('pesquisa', compact('musicoList'));
-=======
-        
-       
-        $musicos = DB::select("SELECT m.id, m.user_id, m.foto, m.biografia, m.nome, u.email
-                FROM users u 
-                INNER JOIN musicos m ON(u.id=m.user_id) 
-                WHERE m.nome LIKE '{$search}%'
-                ");
-        foreach($musicos as $musico){
-           
-            $instrumentos = DB::select("SELECT i.descricao FROM  instrumentos_musicos im INNER JOIN instrumentos i ON(im.inst_id=i.id) WHERE musico_id = {$musico->id} ");
-           
-           
-            $object = (object) $instrumentos;
-            $obj_merged = (object) array_merge((array) $musico, (array) $instrumentos);
-         
-        }
-                
-        
-        
-       
-              
-      
 
-        return view('pesquisa', compact('musicos', 'obj_merged'));
->>>>>>> fea71b7a331ea28838ef7f0060b9867083f551fe
+        return view('pesquisa', compact('musicoList'));
+
     }
 
     public function show()
